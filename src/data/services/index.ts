@@ -1,3 +1,7 @@
+export * from './registry';
+export * from './items/ktp';
+export * from './items/kartu-keluarga';
+
 import { ServiceCategory } from '@/types';
 
 export interface ServiceSummary {
@@ -18,7 +22,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'ktp',
     slug: 'ktp',
     name: 'KTP Elektronik (KTP-el)',
-    shortDescription: 'Pembuatan baru usia 17 tahun, penggantian KTP rusak, atau penerbitan karena KTP hilang.',
+    shortDescription:
+      'Pembuatan baru usia 17 tahun, penggantian KTP rusak, atau penerbitan karena KTP hilang.',
     category: 'kependudukan',
     categoryLabel: 'Administrasi Kependudukan',
     destinationAgency: 'Disdukcapil / Kecamatan / Kelurahan',
@@ -30,7 +35,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'kartu-keluarga',
     slug: 'kartu-keluarga',
     name: 'Kartu Keluarga (KK)',
-    shortDescription: 'Pembuatan KK baru setelah menikah, penambahan anggota keluarga, atau perubahan data elemen.',
+    shortDescription:
+      'Pembuatan KK baru setelah menikah, penambahan anggota keluarga, atau perubahan data elemen.',
     category: 'kependudukan',
     categoryLabel: 'Administrasi Kependudukan',
     destinationAgency: 'Disdukcapil / Kecamatan',
@@ -42,7 +48,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'pindah-domisili',
     slug: 'pindah-domisili',
     name: 'Surat Pindah Domisili (SKPWNI)',
-    shortDescription: 'Surat keterangan pindah antar kelurahan, kecamatan, kabupaten/kota, atau antar provinsi.',
+    shortDescription:
+      'Surat keterangan pindah antar kelurahan, kecamatan, kabupaten/kota, atau antar provinsi.',
     category: 'kependudukan',
     categoryLabel: 'Administrasi Kependudukan',
     destinationAgency: 'Disdukcapil / Kelurahan Asal',
@@ -54,7 +61,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'akta-kelahiran',
     slug: 'akta-kelahiran',
     name: 'Akta Kelahiran',
-    shortDescription: 'Penerbitan kutipan akta kelahiran untuk bayi baru lahir hingga pelaporan terlambat.',
+    shortDescription:
+      'Penerbitan kutipan akta kelahiran untuk bayi baru lahir hingga pelaporan terlambat.',
     category: 'pencatatan_sipil',
     categoryLabel: 'Pencatatan Sipil',
     destinationAgency: 'Disdukcapil / Kelurahan',
@@ -66,7 +74,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'akta-kematian',
     slug: 'akta-kematian',
     name: 'Akta Kematian',
-    shortDescription: 'Pencatatan kematian warga di rumah sakit atau di rumah untuk pemutakhiran data kependudukan.',
+    shortDescription:
+      'Pencatatan kematian warga di rumah sakit atau di rumah untuk pemutakhiran data kependudukan.',
     category: 'pencatatan_sipil',
     categoryLabel: 'Pencatatan Sipil',
     destinationAgency: 'Disdukcapil / Kelurahan',
@@ -78,7 +87,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'sku',
     slug: 'sku',
     name: 'Surat Keterangan Usaha (SKU)',
-    shortDescription: 'Surat keterangan resmi dari kelurahan untuk keperluan pengajuan pinjaman modal atau legalitas usaha mikro.',
+    shortDescription:
+      'Surat keterangan resmi dari kelurahan untuk keperluan pengajuan pinjaman modal atau legalitas usaha mikro.',
     category: 'keterangan_kelurahan',
     categoryLabel: 'Pelayanan Kelurahan',
     destinationAgency: 'Kantor Kelurahan / Desa',
@@ -90,7 +100,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'sktm',
     slug: 'sktm',
     name: 'Surat Keterangan Tidak Mampu (SKTM)',
-    shortDescription: 'Keterangan kondisi ekonomi untuk beasiswa pendidikan, jaminan kesehatan, atau keringanan biaya.',
+    shortDescription:
+      'Keterangan kondisi ekonomi untuk beasiswa pendidikan, jaminan kesehatan, atau keringanan biaya.',
     category: 'keterangan_kelurahan',
     categoryLabel: 'Pelayanan Kelurahan',
     destinationAgency: 'Kantor Kelurahan / Desa & Dinsos',
@@ -102,7 +113,8 @@ export const INITIAL_SERVICES: ServiceSummary[] = [
     id: 'surat-ahli-waris',
     slug: 'surat-ahli-waris',
     name: 'Surat Keterangan Ahli Waris',
-    shortDescription: 'Keterangan penunjukan hak waris atas harta peninggalan almarhum/almarhumah yang disahkan pejabat wilayah.',
+    shortDescription:
+      'Keterangan penunjukan hak waris atas harta peninggalan almarhum/almarhumah yang disahkan pejabat wilayah.',
     category: 'keterangan_kelurahan',
     categoryLabel: 'Pelayanan Kelurahan',
     destinationAgency: 'Kelurahan & Kecamatan',

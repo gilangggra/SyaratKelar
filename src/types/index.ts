@@ -8,11 +8,12 @@ export type ServiceCategory =
   | 'keterangan_kelurahan';
 
 export interface SourceReference {
+  id: string;
   title: string;
   sourceName: string;
   sourceUrl?: string;
-  verifiedAt: string; // ISO date format or 'NEEDS_VERIFICATION'
-  legalBasis?: string; // Dasar hukum, misal UU No. 24 Tahun 2013
+  verifiedAt: string; // ISO Date YYYY-MM-DD atau 'NEEDS_VERIFICATION'
+  legalBasis?: string; // Regulasi resmi, misal: "UU No. 24 Tahun 2013 Pasal 79A"
 }
 
 export interface FeeInfo {
@@ -27,23 +28,24 @@ export interface Requirement {
   id: string;
   title: string;
   description?: string;
-  isMandatory: boolean; // Dokumen wajib atau kondisional
+  isMandatory: boolean; // Dokumen wajib dasar vs kondisional/situasional
   notes?: string;
   templateAvailable?: boolean;
   templateId?: string;
 }
 
-export type QuestionOption = {
+export interface QuestionOption {
   id: string;
   label: string;
   description?: string;
   value: string;
-};
+}
 
 export interface Question {
   id: string;
   title: string;
   description?: string;
+  helpText?: string;
   options: QuestionOption[];
   defaultValue?: string;
 }
@@ -55,7 +57,7 @@ export interface Rule {
   questionId: string;
   operator: RuleOperator;
   value: string | string[];
-  requirementIds: string[]; // Requirement ID yang harus ditampilkan jika kondisi terpenuhi
+  requirementIds: string[]; // Daftar ID requirement yang aktif jika kondisi terpenuhi
 }
 
 export interface Service {
@@ -63,14 +65,16 @@ export interface Service {
   slug: string;
   name: string;
   shortDescription: string;
+  fullDescription?: string;
   category: ServiceCategory;
-  destinationAgency: string; // Misal: "Kantor Dukcapil", "Kelurahan / Kecamatan"
-  estimatedTime?: string;
+  categoryLabel: string;
+  destinationAgency: string; // Misal: "Disdukcapil / Kecamatan"
+  estimatedTime?: string; // Misal: "1 - 3 hari kerja (sesuai ketentuan daerah)"
   fees: FeeInfo;
   sources: SourceReference[];
   questions: Question[];
   rules: Rule[];
-  baseRequirementIds: string[]; // Requirement yang selalu wajib tanpa memandang jawaban
+  baseRequirementIds: string[]; // Requirement yang selalu wajib
   allRequirements: Requirement[];
 }
 
