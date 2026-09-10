@@ -108,19 +108,6 @@ npx tsc --noEmit
 
 ---
 
-## Documentation
-
-| File | Purpose |
-|---|---|
-| `docs/PRD.md` | Product requirements |
-| `docs/TECH_SPEC.md` | Technical specification |
-| `docs/ARCHITECTURE.md` | System architecture |
-| `docs/UI_UX.md` | UI/UX guidelines |
-| `docs/TASKS.md` | Development tasks |
-| `docs/AGENTS.md` | AI coding rules |
-
----
-
 ## Important Disclaimer
 
 CekLayanan merupakan alat bantu persiapan administrasi.

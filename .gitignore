@@ -24,6 +24,12 @@
 .DS_Store
 *.pem
 /docs
+AGENTS.md
+.agents/
+.cursor/
+.gemini/
+.vscode/
+.idea/
 
 # debug
 npm-debug.log*

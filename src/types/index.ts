@@ -1,6 +1,5 @@
 /**
  * CekLayanan Core Types
- * Sesuai TECH_SPEC.md & ARCHITECTURE.md
  */
 
 export type ServiceCategory =
