@@ -30,9 +30,12 @@ export function getChecklistState(serviceId: string): string[] | null {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
 
-    const parsed = JSON.parse(raw) as StoredChecklist;
-    if (parsed && Array.isArray(parsed.checkedIds)) {
-      return parsed.checkedIds;
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      return parsed as string[];
+    }
+    if (parsed && typeof parsed === 'object' && Array.isArray((parsed as StoredChecklist).checkedIds)) {
+      return (parsed as StoredChecklist).checkedIds;
     }
     return null;
   } catch (error) {

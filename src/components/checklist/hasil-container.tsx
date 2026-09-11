@@ -33,13 +33,14 @@ export const HasilContainer: React.FC<HasilContainerProps> = ({ service }) => {
     defaultAnswers
   );
 
-  // Resolve requirements based on answers
-  const resolved = resolveRequirements(service, answers);
+  // Resolve requirements based on answers safely
+  const safeAnswers = answers && typeof answers === 'object' ? answers : defaultAnswers;
+  const resolved = resolveRequirements(service, safeAnswers);
 
   // Identify answered conditions summary
   const conditionSummaries: { questionTitle: string; answerLabel: string }[] = [];
   (service.questions || []).forEach((q) => {
-    const ansVal = answers[q.id];
+    const ansVal = safeAnswers[q.id];
     if (ansVal) {
       const matchedOpt = q.options.find((opt) => opt.value === ansVal);
       if (matchedOpt) {

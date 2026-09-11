@@ -29,26 +29,42 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
   const totalCount = allRequirements.length;
 
   // Hydration-safe checked state from LocalStorage
-  const [checkedIds, setCheckedIds] = useLocalStorage<string[]>(
+  const [storedChecked, setStoredChecked] = useLocalStorage<unknown>(
     `ceklayanan_checklist_${service.id}`,
     []
   );
+
+  // Normalize to always guarantee a string[] array (handles legacy object format or direct array)
+  const checkedIds: string[] = React.useMemo(() => {
+    if (Array.isArray(storedChecked)) {
+      return storedChecked as string[];
+    }
+    if (
+      storedChecked &&
+      typeof storedChecked === 'object' &&
+      'checkedIds' in storedChecked &&
+      Array.isArray((storedChecked as { checkedIds: unknown[] }).checkedIds)
+    ) {
+      return (storedChecked as { checkedIds: string[] }).checkedIds;
+    }
+    return [];
+  }, [storedChecked]);
 
   const checkedCount = checkedIds.length;
   const isAllChecked = totalCount > 0 && checkedCount === totalCount;
 
   const handleToggle = (id: string) => {
-    setCheckedIds((prev) => {
-      const isAlreadyChecked = prev.includes(id);
-      return isAlreadyChecked
-        ? prev.filter((item) => item !== id)
-        : [...prev, id];
-    });
+    const isAlreadyChecked = checkedIds.includes(id);
+    const nextChecked = isAlreadyChecked
+      ? checkedIds.filter((item) => item !== id)
+      : [...checkedIds, id];
+
+    setStoredChecked(nextChecked);
   };
 
   const handleReset = () => {
     if (window.confirm('Apakah Anda yakin ingin mereset seluruh centang checklist ini?')) {
-      setCheckedIds([]);
+      setStoredChecked([]);
     }
   };
 
