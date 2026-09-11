@@ -1,6 +1,12 @@
 export * from './registry';
 export * from './items/ktp';
 export * from './items/kartu-keluarga';
+export * from './items/pindah-domisili';
+export * from './items/akta-kelahiran';
+export * from './items/akta-kematian';
+export * from './items/sku';
+export * from './items/sktm';
+export * from './items/surat-ahli-waris';
 
 import { ServiceCategory } from '@/types';
 

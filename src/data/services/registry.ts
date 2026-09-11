@@ -1,11 +1,23 @@
 import { Service } from '@/types';
 import { ktpService } from './items/ktp';
 import { kartuKeluargaService } from './items/kartu-keluarga';
+import { pindahDomisiliService } from './items/pindah-domisili';
+import { aktaKelahiranService } from './items/akta-kelahiran';
+import { aktaKematianService } from './items/akta-kematian';
+import { skuService } from './items/sku';
+import { sktmService } from './items/sktm';
+import { suratAhliWarisService } from './items/surat-ahli-waris';
 
-// Map of fully configured service items
+// Map of all 8 fully configured administrative services
 const SERVICES_MAP: Record<string, Service> = {
   ktp: ktpService,
   'kartu-keluarga': kartuKeluargaService,
+  'pindah-domisili': pindahDomisiliService,
+  'akta-kelahiran': aktaKelahiranService,
+  'akta-kematian': aktaKematianService,
+  sku: skuService,
+  sktm: sktmService,
+  'surat-ahli-waris': suratAhliWarisService,
 };
 
 /**
@@ -34,4 +46,11 @@ export function isServiceConfigured(slug: string): boolean {
  */
 export function getConfiguredServiceSlugs(): string[] {
   return Object.keys(SERVICES_MAP);
+}
+
+/**
+ * Mendapatkan daftar seluruh objek layanan lengkap
+ */
+export function getAllConfiguredServices(): Service[] {
+  return Object.values(SERVICES_MAP);
 }

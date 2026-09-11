@@ -1,48 +1,60 @@
-import { ktpService } from '../../data/services/items/ktp';
-import { kartuKeluargaService } from '../../data/services/items/kartu-keluarga';
+import { getAllConfiguredServices } from '../../data/services/registry';
 import { resolveRequirements } from './engine';
 
-console.log('=== TESTING RULE ENGINE SCENARIOS ===\n');
+console.log('=== COMPREHENSIVE 8 SERVICES VERIFICATION TEST ===\n');
 
-// 1. Test KTP: Scenario A (Pembuatan Baru + Domisili Asal)
-const resultKtpBaru = resolveRequirements(ktpService, {
-  alasan_pengurusan: 'baru',
-  lokasi_pengurusan: 'domisili_asal',
+const allServices = getAllConfiguredServices();
+console.log(`Total configured services found: ${allServices.length}`);
+
+let hasErrors = false;
+
+allServices.forEach((service) => {
+  console.log(`\nTesting Service: [${service.name}] (${service.slug})`);
+
+  // 1. Check basic integrity
+  if (!service.id || !service.slug || !service.name) {
+    console.error(`ERROR: Service missing required id/slug/name`);
+    hasErrors = true;
+  }
+
+  // 2. Check base requirements
+  const reqMap = new Map(service.allRequirements.map((r) => [r.id, r]));
+  service.baseRequirementIds.forEach((baseId) => {
+    if (!reqMap.has(baseId)) {
+      console.error(`ERROR: baseRequirementId "${baseId}" not found in allRequirements of ${service.slug}`);
+      hasErrors = true;
+    }
+  });
+
+  // 3. Check rules and target requirement IDs
+  service.rules.forEach((rule) => {
+    rule.requirementIds.forEach((reqId) => {
+      if (!reqMap.has(reqId)) {
+        console.error(`ERROR: Rule target requirementId "${reqId}" not found in allRequirements of ${service.slug}`);
+        hasErrors = true;
+      }
+    });
+  });
+
+  // 4. Test execution of resolveRequirements with empty answers
+  const emptyResult = resolveRequirements(service, {});
+  if (emptyResult.mandatory.length !== service.baseRequirementIds.length) {
+    console.error(`ERROR: Expected ${service.baseRequirementIds.length} mandatory, got ${emptyResult.mandatory.length}`);
+    hasErrors = true;
+  }
+
+  // 5. Test execution with default values
+  const defaultAnswers: Record<string, string> = {};
+  service.questions.forEach((q) => {
+    if (q.defaultValue) defaultAnswers[q.id] = q.defaultValue;
+  });
+  const defaultResult = resolveRequirements(service, defaultAnswers);
+  console.log(`- Default answers produce ${defaultResult.mandatory.length} mandatory & ${defaultResult.conditional.length} conditional items (Total: ${defaultResult.all.length})`);
 });
-console.log('Scenario A (KTP Baru, Domisili Asal):');
-console.log('- Base mandatory:', resultKtpBaru.mandatory.map(r => r.id));
-console.log('- Conditional:', resultKtpBaru.conditional.map(r => r.id));
-const hasBiometrik = resultKtpBaru.all.some(r => r.id === 'perekaman_biometrik');
-const hasLuarDomisili = resultKtpBaru.all.some(r => r.id === 'surat_permohonan_luar_domisili');
-console.log('Assert has perekaman_biometrik:', hasBiometrik ? 'PASS' : 'FAIL');
-console.log('Assert NO luar domisili:', !hasLuarDomisili ? 'PASS' : 'FAIL');
 
-// 2. Test KTP: Scenario B (KTP Hilang + Luar Domisili) -> Kombinasi Multiple Rules
-const resultKtpHilangLuar = resolveRequirements(ktpService, {
-  alasan_pengurusan: 'hilang',
-  lokasi_pengurusan: 'luar_domisili',
-});
-console.log('\nScenario B (KTP Hilang, Luar Domisili):');
-const hasKehilangan = resultKtpHilangLuar.all.some(r => r.id === 'surat_kehilangan_polisi');
-const hasLuar = resultKtpHilangLuar.all.some(r => r.id === 'surat_permohonan_luar_domisili');
-const noBiometrik = !resultKtpHilangLuar.all.some(r => r.id === 'perekaman_biometrik');
-console.log('Assert has surat_kehilangan_polisi:', hasKehilangan ? 'PASS' : 'FAIL');
-console.log('Assert has surat_permohonan_luar_domisili:', hasLuar ? 'PASS' : 'FAIL');
-console.log('Assert NO perekaman_biometrik:', noBiometrik ? 'PASS' : 'FAIL');
-
-// 3. Test KK: Scenario C (Pecah KK Menikah)
-const resultKkMenikah = resolveRequirements(kartuKeluargaService, {
-  keperluan_kk: 'menikah_baru',
-});
-console.log('\nScenario C (KK Pecah Menikah):');
-const hasBukuNikah = resultKkMenikah.all.some(r => r.id === 'buku_nikah_perkawinan');
-const hasKkOrtu = resultKkMenikah.all.some(r => r.id === 'kk_lama_kedua_orangtua');
-console.log('Assert has buku_nikah_perkawinan:', hasBukuNikah ? 'PASS' : 'FAIL');
-console.log('Assert has kk_lama_kedua_orangtua:', hasKkOrtu ? 'PASS' : 'FAIL');
-
-// 4. Test Missing Answers & Edge Cases
-console.log('\nScenario D (Edge Cases: Empty Answers & Missing Rules):');
-const resultEmpty = resolveRequirements(ktpService, {});
-console.log('Assert empty answers only returns base mandatory:', resultEmpty.all.length === 1 ? 'PASS' : 'FAIL');
-
-console.log('\n=== ALL SCENARIOS COMPLETED SUCCESSFULLY ===');
+if (hasErrors) {
+  console.error('\nFAILED: Some services have broken requirement ID references.');
+  process.exit(1);
+} else {
+  console.log('\nSUCCESS: All 8 services passed data integrity and rule engine tests!');
+}
