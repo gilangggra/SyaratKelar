@@ -27,22 +27,22 @@ export const Navbar: React.FC = () => {
         {/* Navigation Links */}
         <nav className="flex items-center gap-1 sm:gap-2" aria-label="Navigasi Utama">
           <Link
-            href="/#layanan"
+            href="/layanan"
             className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-50 transition-colors min-h-[44px] flex items-center"
           >
             Layanan
           </Link>
           <Link
-            href="/#cara-kerja"
-            className="hidden sm:flex px-3 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-50 transition-colors min-h-[44px] items-center"
+            href="/template"
+            className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-50 transition-colors min-h-[44px] flex items-center"
           >
-            Cara Kerja
+            Template Surat
           </Link>
           <Link
-            href="/#transparansi"
-            className="hidden md:flex px-3 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-50 transition-colors min-h-[44px] items-center"
+            href="/tentang"
+            className="hidden sm:flex px-3 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-50 transition-colors min-h-[44px] items-center"
           >
-            Biaya & Sumber
+            Tentang & Regulasi
           </Link>
         </nav>
       </div>

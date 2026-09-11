@@ -7,7 +7,8 @@ import { QuestionCard } from './question-card';
 import { Button } from '@/components/ui/button';
 import { ProgressBar } from '@/components/ui/progress-bar';
 import { ArrowRightIcon, ChevronLeftIcon } from '@/components/ui/icons';
-import { saveUserAnswers, getUserAnswers } from '@/lib/storage/answerStorage';
+import { saveUserAnswers } from '@/lib/storage/answerStorage';
+import { useSessionStorage } from '@/lib/storage/useStorage';
 
 export interface QuestionWizardProps {
   service: Service;
@@ -19,13 +20,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
   const totalSteps = questions.length;
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<UserAnswers>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = getUserAnswers(service.id);
-      if (saved && Object.keys(saved).length > 0) {
-        return saved;
-      }
-    }
+  const defaultAnswers = React.useMemo(() => {
     const initial: UserAnswers = {};
     (service.questions || []).forEach((q) => {
       if (q.defaultValue) {
@@ -33,7 +28,12 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
       }
     });
     return initial;
-  });
+  }, [service.questions]);
+
+  const [answers, setAnswers] = useSessionStorage<UserAnswers>(
+    `ceklayanan_answers_${service.id}`,
+    defaultAnswers
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // If service has no conditional questions, direct to hasil

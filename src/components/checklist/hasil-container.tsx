@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Service, UserAnswers } from '@/types';
 import { resolveRequirements } from '@/lib/rules/engine';
-import { getUserAnswers } from '@/lib/storage/answerStorage';
+import { useSessionStorage } from '@/lib/storage/useStorage';
 import { ChecklistView } from './checklist-view';
 import { Badge } from '@/components/ui/badge';
 import { Alert } from '@/components/ui/alert';
@@ -19,19 +19,19 @@ export interface HasilContainerProps {
 }
 
 export const HasilContainer: React.FC<HasilContainerProps> = ({ service }) => {
-  // Load answers from storage with lazy initializer
-  const [answers] = useState<UserAnswers>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = getUserAnswers(service.id);
-      if (saved) return saved;
-    }
-    // Fallback to default values if not yet answered
+  const defaultAnswers = React.useMemo(() => {
     const fallback: UserAnswers = {};
     (service.questions || []).forEach((q) => {
       if (q.defaultValue) fallback[q.id] = q.defaultValue;
     });
     return fallback;
-  });
+  }, [service.questions]);
+
+  // Hydration-safe answers from session storage
+  const [answers] = useSessionStorage<UserAnswers>(
+    `ceklayanan_answers_${service.id}`,
+    defaultAnswers
+  );
 
   // Resolve requirements based on answers
   const resolved = resolveRequirements(service, answers);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Requirement, Service } from '@/types';
 import { ChecklistItem } from './checklist-item';
@@ -12,11 +12,7 @@ import {
   RotateCcwIcon,
   ChevronLeftIcon,
 } from '@/components/ui/icons';
-import {
-  saveChecklistState,
-  getChecklistState,
-  clearChecklistState,
-} from '@/lib/storage/checklistStorage';
+import { useLocalStorage } from '@/lib/storage/useStorage';
 
 export interface ChecklistViewProps {
   service: Service;
@@ -32,16 +28,11 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
   const allRequirements = [...mandatoryRequirements, ...conditionalRequirements];
   const totalCount = allRequirements.length;
 
-  // Initialize checked state from LocalStorage
-  const [checkedIds, setCheckedIds] = useState<string[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = getChecklistState(service.id);
-      if (saved && Array.isArray(saved)) {
-        return saved;
-      }
-    }
-    return [];
-  });
+  // Hydration-safe checked state from LocalStorage
+  const [checkedIds, setCheckedIds] = useLocalStorage<string[]>(
+    `ceklayanan_checklist_${service.id}`,
+    []
+  );
 
   const checkedCount = checkedIds.length;
   const isAllChecked = totalCount > 0 && checkedCount === totalCount;
@@ -49,19 +40,15 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
   const handleToggle = (id: string) => {
     setCheckedIds((prev) => {
       const isAlreadyChecked = prev.includes(id);
-      const next = isAlreadyChecked
+      return isAlreadyChecked
         ? prev.filter((item) => item !== id)
         : [...prev, id];
-
-      saveChecklistState(service.id, next);
-      return next;
     });
   };
 
   const handleReset = () => {
     if (window.confirm('Apakah Anda yakin ingin mereset seluruh centang checklist ini?')) {
       setCheckedIds([]);
-      clearChecklistState(service.id);
     }
   };
 
