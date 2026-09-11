@@ -85,3 +85,25 @@ export interface ChecklistState {
   checkedRequirementIds: string[];
   lastUpdated: string;
 }
+
+// === Template Generator Types ===
+export interface TemplateField {
+  id: string;
+  label: string;
+  type: 'text' | 'date' | 'number' | 'textarea' | 'select';
+  placeholder?: string;
+  required?: boolean;
+  helperText?: string;
+  options?: { label: string; value: string }[];
+}
+
+export interface DocumentTemplate {
+  id: string;
+  slug: string;
+  title: string;
+  officialCode?: string; // Misal: "Formulir F-2.03"
+  description: string;
+  legalBasis: string;
+  destinationAgency: string;
+  fields: TemplateField[];
+}
