@@ -56,7 +56,13 @@ export const skuService: Service = {
       defaultValue: 'di_rumah_pribadi',
     },
   ],
-  baseRequirementIds: ['ktp_pemohon_sku', 'kk_pemohon_sku', 'pengantar_rt_rw_sku', 'foto_usaha'],
+  baseRequirementIds: [
+    'ktp_pemohon_sku',
+    'kk_pemohon_sku',
+    'pengantar_rt_rw_sku',
+    'pernyataan_usaha_sku',
+    'foto_usaha',
+  ],
   allRequirements: [
     {
       id: 'ktp_pemohon_sku',
@@ -76,6 +82,15 @@ export const skuService: Service = {
       description: 'Surat pengantar bertandatangan dan cap basah Ketua RT serta Ketua RW lokasi usaha.',
       isMandatory: true,
       notes: 'Surat keterangan kelurahan non-adminduk pusat tetap membutuhkan pengantar RT/RW sebagai verifikasi lingkungan.',
+    },
+    {
+      id: 'pernyataan_usaha_sku',
+      title: 'Surat Pernyataan Tempat dan Kegiatan Usaha Bermaterai Rp10.000',
+      description: 'Surat pernyataan mandiri mengenai kebenaran kepemilikan dan lokasi usaha aktif yang dijalankan.',
+      isMandatory: true,
+      notes: 'Dibuat mandiri dengan materai Rp10.000 sebelum meminta pengantar RT/RW atau diajukan ke kelurahan.',
+      templateAvailable: true,
+      templateId: 'surat-pernyataan-usaha',
     },
     {
       id: 'foto_usaha',

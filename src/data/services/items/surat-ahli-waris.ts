@@ -109,6 +109,8 @@ export const suratAhliWarisService: Service = {
       description: 'Gambar bagan garis keturunan yang ditandatangani oleh seluruh ahli waris di atas materai.',
       isMandatory: true,
       notes: 'Format bagan silsilah disahkan oleh Ketua RT dan RW setempat sebelum diajukan ke Kelurahan.',
+      templateAvailable: true,
+      templateId: 'pernyataan-silsilah-waris',
     },
     {
       id: 'ktp_dua_saksi_waris',

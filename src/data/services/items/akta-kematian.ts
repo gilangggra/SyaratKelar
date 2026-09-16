@@ -124,6 +124,8 @@ export const aktaKematianService: Service = {
       description: 'Surat pernyataan bermaterai dari ahli waris bahwa KTP almarhum tercecer/hilang.',
       isMandatory: false,
       notes: 'Hanya jika fisik KTP almarhum tidak dapat ditemukan.',
+      templateAvailable: true,
+      templateId: 'pernyataan-kehilangan-ktp-almarhum',
     },
   ],
   rules: [

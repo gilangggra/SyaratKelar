@@ -93,6 +93,8 @@ export const sktmService: Service = {
       description: 'Surat pernyataan yang ditandatangani kepala keluarga menyatakan kebenaran kondisi ekonomi.',
       isMandatory: true,
       notes: 'Format pernyataan biasanya tersedia di kelurahan atau dibuat mandiri.',
+      templateAvailable: true,
+      templateId: 'pernyataan-tidak-mampu',
     },
     {
       id: 'rekomendasi_sekolah_kampus',

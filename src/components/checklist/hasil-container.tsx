@@ -139,6 +139,7 @@ export const HasilContainer: React.FC<HasilContainerProps> = ({ service }) => {
         service={service}
         mandatoryRequirements={resolved.mandatory}
         conditionalRequirements={resolved.conditional}
+        conditions={conditionSummaries}
       />
     </div>
   );

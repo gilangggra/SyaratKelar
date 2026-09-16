@@ -115,6 +115,8 @@ export const aktaKelahiranService: Service = {
       description: 'Surat Pernyataan Tanggung Jawab Mutlak bermaterai Rp10.000 dengan diketahui 2 orang saksi.',
       isMandatory: false,
       notes: 'Sebagai pengganti surat keterangan kelahiran medis jika surat dokter/bidan tidak ada.',
+      templateAvailable: true,
+      templateId: 'sptjm-kelahiran',
     },
     {
       id: 'buku_nikah_ortu',
@@ -129,6 +131,8 @@ export const aktaKelahiranService: Service = {
       description: 'Surat pernyataan bermaterai Rp10.000 yang menyatakan kebenaran ikatan suami-istri.',
       isMandatory: false,
       notes: 'Bagi perkawinan yang belum tercatat resmi pada catatan negara.',
+      templateAvailable: true,
+      templateId: 'sptjm-suami-istri',
     },
   ],
   rules: [
