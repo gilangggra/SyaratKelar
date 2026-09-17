@@ -161,4 +161,46 @@ export const kartuKeluargaService: Service = {
       requirementIds: ['fisik_kk_rusak'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'kk-menikah-segera-pisah',
+      title: 'Segera Buat KK Baru Setelah Menikah',
+      description: 'Jangan menunda pemisahan KK mandiri setelah menikah resmi. Memiliki KK sendiri sebelum kelahiran anak akan mempermudah penerbitan NIK dan Akta Kelahiran anak pertama secara langsung.',
+      type: 'warning',
+    },
+    {
+      id: 'kk-penarikan-fisik-lama',
+      title: 'Fisik KK Lama Ditarik Petugas',
+      description: 'Saat mengambil lembar KK baru yang sudah diterbitkan, lembar KK fisik asli yang lama wajib diserahkan kepada petugas loket untuk ditarik agar tidak terjadi duplikasi dokumen fisik.',
+      type: 'caution',
+    },
+    {
+      id: 'kk-bukti-perubahan-data',
+      title: 'Wajib Dokumen Pembuktian untuk Ganti Data',
+      description: 'Perubahan nama, gelar, agama, atau pendidikan di KK wajib melampirkan salinan ijazah terakhir, penetapan pengadilan, atau bukti sah lainnya. Petugas tidak dapat mengubah data hanya berdasarkan lisan.',
+      type: 'info',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-kk-1',
+      question: 'Bolehkah kepala keluarga berstatus seorang wanita/istri?',
+      answer: 'Boleh. Seorang wanita berhak menjadi Kepala Keluarga apabila berstatus janda cerai hidup/mati, atau dalam kondisi suami belum bekerja/sakit permanen berdasarkan kesepakatan internal keluarga.',
+    },
+    {
+      id: 'faq-kk-2',
+      question: 'Apakah KK baru yang menggunakan barcode (QR Code) perlu dilegalisir?',
+      answer: 'Tidak perlu. Sesuai Permendagri No. 104/2019, seluruh dokumen kependudukan berformat Tanda Tangan Elektronik (TTE / QR Code) telah sah secara hukum dan tidak memerlukan legalisir cap basah lagi untuk keperluan apapun.',
+    },
+    {
+      id: 'faq-kk-3',
+      question: 'Apakah cetak KK baru dikenakan biaya retribusi?',
+      answer: 'Gratis Rp0. Berdasarkan UU No. 24 Tahun 2013 Pasal 79A, penerbitan dan perubahan Kartu Keluarga bebas dari segala biaya.',
+    },
+    {
+      id: 'faq-kk-4',
+      question: 'Bisakah mencetak sendiri file Kartu Keluarga di kertas HVS?',
+      answer: 'Bisa. Masyarakat dapat meminta file PDF KK resmi ber-barcode dari Disdukcapil (atau melalui aplikasi IKD / loket daring dinas) dan mencetaknya mandiri menggunakan kertas HVS putih ukuran A4 80 gram yang sah secara legal.',
+    },
+  ],
 };

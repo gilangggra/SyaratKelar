@@ -165,4 +165,41 @@ export const aktaKelahiranService: Service = {
       requirementIds: ['sptjm_suami_istri'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'akta-ejaan-nama-final',
+      title: 'Ejaan Nama Anak Harus Benar-Benar Final',
+      description: 'Pastikan penulisan nama lengkap anak sudah disepakati bulat oleh ayah dan ibu. Perubahan nama anak setelah akta kelahiran terbit memerlukan proses persidangan dan penetapan Pengadilan Negeri.',
+      type: 'warning',
+    },
+    {
+      id: 'akta-batas-60-hari',
+      title: 'Disarankan Lapor Sebelum 60 Hari',
+      description: 'Pelaporan kelahiran bayi sebaiknya dilakukan dalam kurun waktu 60 hari sejak persalinan agar data kependudukan anak (NIK & Akta) langsung terintegrasi untuk kebutuhan BPJS Kesehatan dan imunisasi.',
+      type: 'caution',
+    },
+    {
+      id: 'akta-saksi-tidak-wajib-hadir',
+      title: 'Saksi Tidak Wajib Hadir di Loket',
+      description: 'Dua orang saksi kelahiran (kerabat/tetangga) tidak perlu ikut datang antre di loket Disdukcapil. Cukup sertakan fotokopi KTP-el kedua saksi yang bersangkutan.',
+      type: 'info',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-akta-1',
+      question: 'Apakah orang tua yang nikah siri tetap bisa membuat akta lahir untuk anaknya?',
+      answer: 'Bisa. Berdasarkan Permendagri No. 108/2019, setiap anak Indonesia berhak mendapatkan akta kelahiran. Pasangan yang nikah siri cukup melampirkan SPTJM Kebenaran Pasangan Suami Istri (Formulir F-2.04), dan frasa pada akta akan mencantumkan anak dari pasangan suami-istri yang perkawinannya belum tercatat.',
+    },
+    {
+      id: 'faq-akta-2',
+      question: 'Bagaimana jika surat keterangan lahir dari bidan/dokter hilang atau persalinan mandiri?',
+      answer: 'Pemohon dapat menggunakan SPTJM Kebenaran Data Kelahiran (Formulir F-2.03) bermaterai Rp10.000 dengan diketahui oleh 2 orang saksi sebagai pengganti surat medis resmi.',
+    },
+    {
+      id: 'faq-akta-3',
+      question: 'Apakah pelaporan akta lahir yang terlambat bertahun-tahun dikenakan denda?',
+      answer: 'Tidak ada denda retribusi di loket Disdukcapil. Berdasarkan UU No. 24 Tahun 2013 Pasal 79A, seluruh pengurusan pencatatan kelahiran adalah bebas biaya (Gratis Rp0).',
+    },
+  ],
 };

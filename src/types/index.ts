@@ -76,6 +76,21 @@ export interface Service {
   rules: Rule[];
   baseRequirementIds: string[]; // Requirement yang selalu wajib
   allRequirements: Requirement[];
+  pitfalls?: ServicePitfall[];
+  faqs?: ServiceFaq[];
+}
+
+export interface ServicePitfall {
+  id: string;
+  title: string;
+  description: string;
+  type?: 'warning' | 'caution' | 'info';
+}
+
+export interface ServiceFaq {
+  id: string;
+  question: string;
+  answer: string;
 }
 
 export type UserAnswers = Record<string, string>;

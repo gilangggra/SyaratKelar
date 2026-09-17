@@ -8,6 +8,8 @@ import { useSessionStorage } from '@/lib/storage/useStorage';
 import { ChecklistView } from './checklist-view';
 import { Badge } from '@/components/ui/badge';
 import { Alert } from '@/components/ui/alert';
+import { ServicePitfalls } from '@/components/service/service-pitfalls';
+import { ServiceFaqAccordion } from '@/components/service/service-faq';
 import {
   Building2Icon,
   ShieldCheckIcon,
@@ -141,6 +143,20 @@ export const HasilContainer: React.FC<HasilContainerProps> = ({ service }) => {
         conditionalRequirements={resolved.conditional}
         conditions={conditionSummaries}
       />
+
+      {/* Pitfalls / Peringatan Penting di Loket */}
+      {service.pitfalls && service.pitfalls.length > 0 && (
+        <div className="no-print pt-2">
+          <ServicePitfalls pitfalls={service.pitfalls} />
+        </div>
+      )}
+
+      {/* Counter FAQ / Tanya Jawab Loket */}
+      {service.faqs && service.faqs.length > 0 && (
+        <div className="no-print pt-2">
+          <ServiceFaqAccordion faqs={service.faqs} />
+        </div>
+      )}
     </div>
   );
 };

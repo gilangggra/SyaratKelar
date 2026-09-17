@@ -6,6 +6,8 @@ import { getServiceBySlug, INITIAL_SERVICES } from '@/data/services';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Alert } from '@/components/ui/alert';
+import { ServicePitfalls } from '@/components/service/service-pitfalls';
+import { ServiceFaqAccordion } from '@/components/service/service-faq';
 import {
   Building2Icon,
   ChevronLeftIcon,
@@ -201,6 +203,20 @@ export default async function ServiceOverviewPage({ params }: PageProps) {
             )}
           </Alert>
         </div>
+
+        {/* Pitfalls / Peringatan Kesalahan Umum */}
+        {service.pitfalls && service.pitfalls.length > 0 && (
+          <div className="mb-8">
+            <ServicePitfalls pitfalls={service.pitfalls} />
+          </div>
+        )}
+
+        {/* Counter FAQ / Tanya Jawab Seputar Loket */}
+        {service.faqs && service.faqs.length > 0 && (
+          <div className="mb-8">
+            <ServiceFaqAccordion faqs={service.faqs} />
+          </div>
+        )}
 
         {/* Verified Sources / References */}
         {service.sources && service.sources.length > 0 && (

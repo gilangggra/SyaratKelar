@@ -150,4 +150,41 @@ export const suratAhliWarisService: Service = {
       requirementIds: ['akta_kematian_ahli_waris_lama'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'waris-wajib-semua-tanda-tangan',
+      title: 'Seluruh Ahli Waris Sah Wajib Tanda Tangan',
+      description: 'Lurah dan Camat tidak akan pernah bersedia menandatangani atau mengesahkan Surat Keterangan Ahli Waris apabila ada salah satu anak kandung atau ahli waris sah yang belum bertandatangan atau tidak setuju.',
+      type: 'warning',
+    },
+    {
+      id: 'waris-anak-bawah-umur',
+      title: 'Ahli Waris di Bawah Umur Butuh Penetapan Wali',
+      description: 'Jika terdapat anak di bawah 18 tahun, tanda tangan perwakilan hak warisnya untuk urusan perbankan atau sertifikat tanah di BPN memerlukan Surat Penetapan Wali dari Pengadilan Agama atau Pengadilan Negeri.',
+      type: 'caution',
+    },
+    {
+      id: 'waris-dua-saksi-lingkungan',
+      title: 'Dua Orang Saksi dari Pengurus Lingkungan',
+      description: 'Dua orang saksi silsilah keluarga umumnya adalah Ketua RT dan Ketua RW yang mengetahui silsilah keluarga pewaris sejak lama dan bersedia membubuhkan tanda tangan kesaksian.',
+      type: 'info',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-waris-1',
+      question: 'Apa beda Surat Ahli Waris dari Kelurahan dengan Akta Waris dari Notaris?',
+      answer: 'Berdasarkan penggolongan hukum waris di Indonesia, Surat Keterangan Ahli Waris yang disahkan Lurah dan Camat berlaku bagi WNI penduduk pribumi. Sedangkan untuk WNI keturunan Tionghoa dibuat melalui Akta Notaris, dan WNI keturunan Timur Asing (Arab/India) melalui Balai Harta Peninggalan (BHP).',
+    },
+    {
+      id: 'faq-waris-2',
+      question: 'Apakah pengesahan di Kelurahan dan Kecamatan berbayar?',
+      answer: 'Pengesahan tanda tangan oleh pejabat Kelurahan dan Kecamatan adalah Gratis Rp0. Biaya yang dikeluarkan pemohon murni hanya untuk pembelian materai fisik Rp10.000.',
+    },
+    {
+      id: 'faq-waris-3',
+      question: 'Berapa lama proses pengesahan dari Kelurahan sampai Kecamatan?',
+      answer: 'Umumnya membutuhkan waktu 2 sampai 5 hari kerja, karena berkas terlebih dahulu diverifikasi oleh Kasi Pemerintahan Kelurahan, diregistrasi buku register kelurahan, lalu dikirim/dibawa ke kantor Kecamatan untuk penandatanganan oleh Camat.',
+    },
+  ],
 };

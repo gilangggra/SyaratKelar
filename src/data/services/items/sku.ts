@@ -116,4 +116,41 @@ export const skuService: Service = {
       requirementIds: ['perjanjian_sewa_lokasi'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'sku-masa-berlaku-rt-rw',
+      title: 'Masa Berlaku Surat Pengantar RT/RW',
+      description: 'Surat pengantar dari Ketua RT dan RW setempat umumnya hanya diakui berlaku selama maksimal 30 hari sejak tanggal ditandatangani. Segera bawa berkas ke kantor Kelurahan/Desa.',
+      type: 'warning',
+    },
+    {
+      id: 'sku-foto-kegiatan-jelas',
+      title: 'Foto Usaha Harus Memperlihatkan Aktivitas Riil',
+      description: 'Pastikan foto fisik yang dicetak memperlihatkan plang nama usaha, produk jualan, atau diri Anda saat berada di lokasi usaha. Petugas kelurahan menolak foto yang hanya diambil dari internet.',
+      type: 'caution',
+    },
+    {
+      id: 'sku-izin-sewa',
+      title: 'Sewa Tempat Wajib Surat Perjanjian',
+      description: 'Jika lokasi usaha bukan di rumah sendiri (menyewa ruko/kios/lahan pihak lain), siapkan fotokopi surat perjanjian sewa atau surat persetujuan dari pemilik tempat.',
+      type: 'info',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-sku-1',
+      question: 'Apa perbedaan SKU dari Kelurahan dengan NIB (Nomor Induk Berusaha)?',
+      answer: 'SKU adalah surat keterangan wilayah dari Kelurahan yang lazim digunakan untuk syarat pengajuan pinjaman modal KUR di bank. NIB adalah identitas legalitas usaha nasional resmi yang diterbitkan secara online melalui portal OSS (Online Single Submission) Kementerian Investasi/BKPM.',
+    },
+    {
+      id: 'faq-sku-2',
+      question: 'Apakah pembuatan SKU di Kelurahan dikenakan biaya?',
+      answer: 'Gratis Rp0. Seluruh pelayanan administrasi persuratan di Kelurahan dan Kantor Desa tidak dikenakan biaya retribusi apapun.',
+    },
+    {
+      id: 'faq-sku-3',
+      question: 'Apakah usaha yang baru buka 1 bulan bisa dibuatkan SKU?',
+      answer: 'Bisa, asalkan usaha tersebut memang nyata beroperasi secara fisik di lingkungan tersebut dan diketahui oleh Ketua RT dan RW setempat.',
+    },
+  ],
 };

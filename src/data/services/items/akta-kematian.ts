@@ -158,4 +158,41 @@ export const aktaKematianService: Service = {
       requirementIds: ['surat_pernyataan_ktp_hilang'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'mati-penarikan-ktp-almarhum',
+      title: 'Fisik KTP Almarhum Ditarik/Dilubangi',
+      description: 'Fisik KTP-el asli almarhum akan dilubangi atau ditarik oleh petugas Disdukcapil untuk dinonaktifkan sistemnya guna mencegah penyalahgunaan data perbankan atau pinjaman pihak tidak bertanggung jawab.',
+      type: 'warning',
+    },
+    {
+      id: 'mati-pemutakhiran-kk-otomatis',
+      title: 'Nama Almarhum Dihapus dari Kartu Keluarga',
+      description: 'Bersamaan dengan terbitnya Akta Kematian, Disdukcapil akan otomatis mencetak Kartu Keluarga (KK) baru bagi keluarga yang ditinggalkan tanpa mencantumkan lagi nama almarhum.',
+      type: 'info',
+    },
+    {
+      id: 'mati-kematian-lama',
+      title: 'Pelaporan Kematian yang Sudah Bertahun-Tahun',
+      description: 'Bagi kematian yang sudah berlangsung lama (bertahun-tahun lampau) dan tidak memiliki surat dokter, lampirkan Surat Keterangan Kematian dari Kepala Desa/Lurah setempat atau surat keterangan dari pengurus makam.',
+      type: 'caution',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-mati-1',
+      question: 'Siapa saja yang berhak melaporkan dan mengurus Akta Kematian?',
+      answer: 'Pelapor utama adalah ahli waris (suami/istri, anak kandung, orang tua almarhum). Jika almarhum sebatang kara, pengurus RT/RW atau pihak rumah sakit berhak menjadi pelapor resmi.',
+    },
+    {
+      id: 'faq-mati-2',
+      question: 'Mengapa Akta Kematian sangat penting diurus segera?',
+      answer: 'Akta kematian merupakan dokumen mutlak untuk pengurusan klaim asuransi jiwa, pencairan tabungan/deposito almarhum di bank, pengurusan pensiun janda/duda (Taspen/Asabri/BPJS Ketenagakerjaan), dan pembagian harta warisan.',
+    },
+    {
+      id: 'faq-mati-3',
+      question: 'Bagaimana jika fisik KTP almarhum hilang atau tercecer?',
+      answer: 'Cukup buat Surat Pernyataan Kehilangan KTP Almarhum bermaterai Rp10.000 yang ditandatangani oleh ahli waris/pelapor. CekLayanan menyediakan template mandiri siap cetak untuk surat ini.',
+    },
+  ],
 };

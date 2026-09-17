@@ -127,4 +127,41 @@ export const sktmService: Service = {
       requirementIds: ['surat_keterangan_rawat_rs'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'sktm-tanda-tangan-materai',
+      title: 'Tanda Tangan Harus Menyeberang Materai',
+      description: 'Pada surat pernyataan tidak mampu mandiri bermaterai Rp10.000, tanda tangan pemohon wajib mengenai sebagian permukaan materai dan sebagian kertas. Jangan menandatangani hanya di bagian kertas kosong di luar materai.',
+      type: 'warning',
+    },
+    {
+      id: 'sktm-tujuan-spesifik',
+      title: 'Tujuan Pengajuan Harus Spesifik',
+      description: 'Format SKTM diterbitkan sesuai tujuan spesifik (misal: "Untuk Persyaratan KIP Kuliah" atau "Untuk Keringanan Biaya Rumah Sakit"). SKTM tidak dapat dibuat berlaku umum tanpa tujuan jelas.',
+      type: 'caution',
+    },
+    {
+      id: 'sktm-survei-lingkungan',
+      title: 'Verifikasi Kondisi Riil oleh RT/RW',
+      description: 'Ketua RT dan RW berhak menolak memberikan pengantar jika pemohon secara kasat mata dinilai mampu secara finansial. Kejujuran data ekonomi sangat diutamakan.',
+      type: 'info',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-sktm-1',
+      question: 'Berapa lama masa berlaku selembar SKTM?',
+      answer: 'SKTM umumnya hanya berlaku untuk satu kali keperluan pengajuan yang diajukan, atau berumur maksimal 3 sampai 6 bulan sejak tanggal diterbitkan oleh kelurahan.',
+    },
+    {
+      id: 'faq-sktm-2',
+      question: 'Apakah harus terdaftar di DTKS (Data Terpadu Kesejahteraan Sosial) Kemensos?',
+      answer: 'Untuk pengajuan beasiswa KIP Kuliah atau BPJS PBI, prioritas utama diberikan kepada keluarga yang sudah masuk dalam DTKS. Namun bagi yang belum masuk DTKS, kelurahan tetap dapat menerbitkan SKTM berdasarkan verifikasi riil kondisi ekonomi warga saat ini.',
+    },
+    {
+      id: 'faq-sktm-3',
+      question: 'Apakah pengurusan SKTM di Kelurahan dipungut biaya?',
+      answer: 'Gratis Rp0. Tidak ada biaya retribusi apapun di kelurahan. Pemohon hanya menyiapkan materai fisik Rp10.000 mandiri untuk lembar surat pernyataan.',
+    },
+  ],
 };

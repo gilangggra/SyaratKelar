@@ -148,4 +148,52 @@ export const ktpService: Service = {
       requirementIds: ['surat_permohonan_luar_domisili'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'ktp-kehadiran-fisik',
+      title: 'Perekaman Biometrik Wajib Hadir Sendiri',
+      description: 'Perekaman foto wajah, sidik jari 10 jari, dan iris mata mutlak memerlukan kehadiran fisik pemohon dan tidak dapat diwakilkan oleh siapapun.',
+      type: 'warning',
+    },
+    {
+      id: 'ktp-pakaian-foto',
+      title: 'Hindari Pakaian Putih & Kaos Oblong',
+      description: 'Latar belakang foto KTP berwarna merah (tahun lahir ganjil) atau biru (tahun lahir genap). Kenakan kemeja berkerah yang rapi dan hindari warna putih atau pakaian tanpa lengan agar tidak ditolak petugas foto.',
+      type: 'caution',
+    },
+    {
+      id: 'ktp-surat-kehilangan',
+      title: 'KTP Hilang Wajib Surat Polsek',
+      description: 'Jika mengurus KTP hilang, surat laporan kehilangan dari kantor kepolisian (Polsek/Polres) wajib masih berlaku dan mencantumkan NIK yang sesuai dengan Kartu Keluarga.',
+      type: 'info',
+    },
+    {
+      id: 'ktp-bebas-biaya',
+      title: 'Jangan Tergiur Calo Cetak Cepat',
+      description: 'Pencetakan KTP-el resmi adalah GRATIS Rp0 sesuai UU No. 24/2013 Pasal 79A. Pembayaran biaya tidak resmi kepada pihak manapun melanggar hukum.',
+      type: 'warning',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-ktp-1',
+      question: 'Apakah bisa cetak KTP-el di luar kota domisili KTP asal?',
+      answer: 'Bisa. Berdasarkan Permendagri, pencetakan KTP-el yang rusak atau hilang dapat dilayani di seluruh Kantor Disdukcapil se-Indonesia (layanan KTP luar domisili) tanpa harus pulang kampung, selama data biometrik Anda sudah terekam di sistem pusat.',
+    },
+    {
+      id: 'faq-ktp-2',
+      question: 'Apakah foto pada KTP-el bisa diganti?',
+      answer: 'Bisa, dengan ketentuan: Anda yang sebelumnya belum berhijab kini sudah berhijab, atau KTP fisik Anda rusak/patah/foto pudar sehingga perlu dicetak ulang sekalian foto baru di loket Disdukcapil.',
+    },
+    {
+      id: 'faq-ktp-3',
+      question: 'Berapa lama waktu pencetakan fisik KTP-el di loket?',
+      answer: 'Umumnya pencetakan hanya membutuhkan waktu 15 - 60 menit jika blangko KTP di dinas setempat sedang tersedia. Jika ketersediaan blangko habis, dinas akan menerbitkan IKD (Identitas Kependudukan Digital) atau Surat Keterangan sementara.',
+    },
+    {
+      id: 'faq-ktp-4',
+      question: 'Apakah anak usia 16 tahun sudah boleh ikut rekam KTP-el?',
+      answer: 'Boleh. Remaja berusia 16 tahun ke atas diperbolehkan melakukan perekaman biometrik terlebih dahulu di sekolah atau kecamatan, dan fisik KTP-el akan dicetak dan diserahkan tepat saat yang bersangkutan berulang tahun ke-17.',
+    },
+  ],
 };

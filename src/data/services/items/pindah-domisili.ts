@@ -117,4 +117,41 @@ export const pindahDomisiliService: Service = {
       requirementIds: ['ktp_anggota_pindah'],
     },
   ],
+  pitfalls: [
+    {
+      id: 'pindah-tanpa-rt-rw',
+      title: 'Tidak Perlu Pengantar RT/RW Lagi',
+      description: 'Berdasarkan Perpres No. 96 Tahun 2018, pengurusan surat pindah domisili (SKPWNI) TIDAK LAGI membutuhkan surat pengantar RT/RW. Anda dapat langsung mendatangi Disdukcapil atau loket kelurahan asal.',
+      type: 'info',
+    },
+    {
+      id: 'pindah-masa-berlaku-skpwni',
+      title: 'Masa Berlaku SKPWNI 100 Hari Kerja',
+      description: 'Surat Keterangan Pindah WNI (SKPWNI) memiliki masa kedaluwarsa 100 hari kerja sejak tanggal penerbitan. Segera laporkan ke Disdukcapil daerah tujuan sebelum masa berlaku habis agar tidak perlu mengulang permohonan di daerah asal.',
+      type: 'warning',
+    },
+    {
+      id: 'pindah-penarikan-ktp',
+      title: 'KTP Lama Ditarik di Daerah Tujuan',
+      description: 'Fisik KTP-el lama beralamat asal akan ditarik oleh petugas Disdukcapil daerah tujuan saat Anda mendaftarkan kedatangan untuk ditukar dengan KTP-el baru beralamat tujuan.',
+      type: 'caution',
+    },
+  ],
+  faqs: [
+    {
+      id: 'faq-pindah-1',
+      question: 'Apakah bisa mengurus surat pindah secara online?',
+      answer: "Bisa di banyak kabupaten/kota. Sebagian besar Disdukcapil kini menyediakan layanan online atau aplikasi daerah (seperti Alpukat Betawi di DKI Jakarta, Si D'nOK di Semarang, dsb.) di mana SKPWNI dapat diunduh langsung dalam format PDF ber-barcode.",
+    },
+    {
+      id: 'faq-pindah-2',
+      question: 'Apakah bisa pindah domisili hanya 1 orang anak saja?',
+      answer: 'Bisa. Status kepindahan dapat berupa: Kepala Keluarga saja, Kepala Keluarga dan seluruh anggota, Kepala Keluarga dan sebagian anggota, atau Anggota keluarga saja (seperti anak yang kuliah atau bekerja di kota lain).',
+    },
+    {
+      id: 'faq-pindah-3',
+      question: 'Bagaimana nasib anggota keluarga yang ditinggal di daerah asal?',
+      answer: 'Disdukcapil daerah asal akan otomatis menerbitkan Kartu Keluarga baru bagi anggota keluarga yang tidak ikut pindah dengan pemutakhiran susunan nama dan kepala keluarga baru jika kepala keluarga lama yang pindah.',
+    },
+  ],
 };
