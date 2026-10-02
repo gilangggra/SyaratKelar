@@ -108,6 +108,20 @@ npx tsc --noEmit
 
 ---
 
+## Documentation
+
+| File | Purpose |
+|---|---|
+| [`DOKUMENTASI_PROYEK.md`](./DOKUMENTASI_PROYEK.md) | Panduan lengkap keseluruhan fungsi, alur, fitur, & teknis |
+| [`docs/PRD.md`](./docs/PRD.md) | Product requirements |
+| [`docs/TECH_SPEC.md`](./docs/TECH_SPEC.md) | Technical specification |
+| [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | System architecture |
+| [`docs/UI_UX.md`](./docs/UI_UX.md) | UI/UX guidelines |
+| [`docs/TASKS.md`](./docs/TASKS.md) | Development tasks |
+| [`docs/AGENTS.md`](./docs/AGENTS.md) | AI coding rules |
+
+---
+
 ## Important Disclaimer
 
 CekLayanan merupakan alat bantu persiapan administrasi.
@@ -116,7 +130,7 @@ Informasi administratif dapat berubah dan keputusan akhir mengenai penerimaan do
 
 Informasi yang ditampilkan sebagai informasi resmi harus memiliki sumber yang dapat diverifikasi.
 
----
+-------
 
 ## Product Principle
 
