@@ -139,3 +139,5 @@ Informasi yang ditampilkan sebagai informasi resmi harus memiliki sumber yang da
 CekLayanan tidak dibuat untuk memiliki fitur sebanyak mungkin.
 
 CekLayanan dibuat untuk membantu seseorang datang ke kantor pelayanan dengan persiapan yang lebih baik.
+
+------
