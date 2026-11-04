@@ -69,16 +69,25 @@ ALUR BARU (DENGAN CEKLAYANAN):
 
 ## 3. FITUR-FITUR UTAMA SISTEM
 
-### 3.1 Mesin Persyaratan Bersyarat (Conditional Rule Engine)
+### 3.1 Mesin Persyaratan Bersyarat v2 (Conditional Rule Engine v2)
 Fitur inti yang mengevaluasi pertanyaan kondisi pengguna (misal: usia pemohon, lokasi peristiwa, kepemilikan buku nikah, atau cakupan kepindahan). Sistem menggabungkan:
-* **Persyaratan Wajib Dasar (`baseRequirementIds`):** Dokumen yang wajib dibawa oleh semua pemohon untuk layanan tersebut.
-* **Persyaratan Kondisional (`conditionalRequirementIds`):** Dokumen situasional yang hanya muncul jika jawaban pengguna memenuhi aturan (`Rule`).
+* **Persyaratan Wajib Dasar (`baseRequirementIds`):** Dokumen yang wajib dibawa oleh pemohon untuk layanan tersebut.
+* **Persyaratan Kondisional (`conditionalRequirementIds`) & Pengecualian Dinamis (`excludeRequirementIds`):** Dokumen situasional yang muncul jika jawaban pengguna memenuhi aturan tunggal maupun multi-kondisi (`AND`/`OR`), serta kemampuan menggantikan syarat dasar (misal: pencatatan Akta Kelahiran anak dari seorang ibu kandung saja menggantikan syarat KTP kedua orang tua menjadi KTP ibu kandung saja sesuai Permendagri 108/2019 Pasal 34).
+* **Percabangan Pertanyaan Dinamis (`dependsOn`):** Pertanyaan lanjutan hanya ditampilkan bila relevan dengan jawaban sebelumnya.
+* **Penjelasan Alasan Kondisional (*Explainable Rules*) & Kalkulator Persiapan Fisik (`PreparationSummary`):** Menampilkan alasan mengapa suatu berkas diminta dan menghitung otomatis jumlah dokumen utama, kebutuhan lembar Materai Rp10.000, ketersediaan template mandiri, serta tautan layanan prasyarat lintas instansi.
 
-### 3.2 Lembar Ceklist Interaktif (Interactive Checklist)
-* Pengguna dapat menandai berkas yang sudah siap dengan mencentang kotak interaktif.
-* Dilengkapi **Progress Bar & Penghitung Status Kesiapan Dokumen** (misal: "3 dari 5 Dokumen Siap").
-* Status centang tersimpan secara otomatis dan aman di **LocalStorage** peramban perangkat pengguna sehingga tidak hilang saat halaman dimuat ulang.
-* Tombol **Reset Centang** untuk mengosongkan status bila diperlukan.
+### 3.2 Lembar Ceklist Interaktif & Dashboard Persiapan Aktif (Interactive Checklist)
+* Pengguna dapat menandai berkas yang sudah siap dengan mencentang kotak interaktif, serta mengubah kondisi secara instan (*Inline Condition Switcher*) langsung di halaman hasil.
+* Dilengkapi **Progress Bar & Penghitung Status Kesiapan Dokumen** (misal: "3 dari 5 Dokumen Siap") dan kartu **"Lanjutkan Persiapan Dokumen Anda"** di halaman utama untuk melanjutkan checklist yang sedang dikerjakan.
+* Status centang dan jawaban kondisi tersimpan secara otomatis di **LocalStorage** peramban serta disinkronkan ke **URL Query Parameter** agar tautan checklist yang dibagikan melalui WhatsApp langsung menampilkan kondisi yang tepat.
+* Tombol **Tandai Semua Siap** dan **Reset Centang** untuk mengelola status dengan cepat.
+
+### 3.3 Panduan Paket Peristiwa Kehidupan (Life-Event Service Bundles)
+* Menyediakan urutan pengurusan lintas layanan untuk peristiwa kehidupan nyata masyarakat:
+  1. **Kelahiran Buah Hati:** Tambah Anggota di KK (NIK Bayi) $\rightarrow$ Akta Kelahiran.
+  2. **Menikah & Keluarga Baru:** Surat Pindah (SKPWNI) $\rightarrow$ Buat KK Baru $\rightarrow$ KTP-el Status Kawin.
+  3. **Kedukaan & Pengurusan Waris:** Akta Kematian & Update KK $\rightarrow$ Surat Keterangan Ahli Waris.
+  4. **Dompet / Dokumen Hilang:** Cetak Ulang KK Hilang $\rightarrow$ Cetak Ulang KTP-el Hilang.
 
 ### 3.3 Mode Cetak & Simpan PDF Siap Bawa (Printable Checklist)
 * Disediakan tombol **"Cetak / Simpan PDF"** yang memanfaatkan stylesheet khusus `@media print`.
@@ -478,6 +487,6 @@ Sistem dirancang modular (*Extensible Architecture*). Untuk menambahkan layanan 
 3. **Penyimpanan Cloud Opsional (Supabase):** Opsi login bagi pengguna yang ingin menyinkronkan status berkas antar perangkat tanpa mengurangi prinsip perlindungan privasi.
 4. **Dukungan Multi-bahasa:** Menambahkan bahasa daerah utama (Jawa, Sunda) untuk semakin mempermudah kalangan lansia dan warga di pedesaan.
 
----
+-------
 
 *Dokumentasi ini disusun sebagai acuan komprehensif seluruh pengembang, pemangku kepentingan, dan agen AI yang bekerja pada ekosistem proyek CekLayanan.*

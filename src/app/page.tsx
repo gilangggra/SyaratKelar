@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { ServiceSearch } from '@/components/service/service-search';
+import { LifeEventsSection } from '@/components/service/life-events-section';
 import {
   ShieldCheckIcon,
   CheckIcon,
   InfoIcon,
   ArrowRightIcon,
+  FileTextIcon,
 } from '@/components/ui/icons';
 
 export default function HomePage() {
@@ -33,32 +35,37 @@ export default function HomePage() {
 
             {/* Sub-headline */}
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              Ketahui persyaratan dokumen resmi yang sesuai dengan kondisi Anda. Hindari
-              bolak-balik kantor pelayanan dan pastikan berkas siap sebelum datang ke loket.
+              Ketahui persyaratan dokumen resmi yang disesuaikan dengan kondisi spesifik Anda.
+              Hindari bolak-balik kantor pelayanan dan siapkan map berkas sekali jalan.
             </p>
 
             {/* Micro Highlights */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-600">
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckIcon className="w-4 h-4 text-emerald-600 shrink-0" />
-                Disesuaikan dengan kondisi
+                Disaring cerdas sesuai kondisi Anda
               </span>
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckIcon className="w-4 h-4 text-emerald-600 shrink-0" />
-                Biaya resmi transparan (Rp0)
+                Biaya resmi transparan (Gratis Rp0)
               </span>
               <span className="flex items-center gap-1.5 font-medium">
                 <CheckIcon className="w-4 h-4 text-emerald-600 shrink-0" />
-                Privat, tanpa minta NIK / login
+                Privat 100% di perangkat, tanpa login
               </span>
             </div>
           </div>
 
-          {/* 3. Interactive Service Search & Grid */}
+          {/* 3. Interactive Service Search, Active Checklists, & Grid */}
           <ServiceSearch />
         </section>
 
-        {/* 4. Cara Kerja Section */}
+        {/* 4. Panduan Paket Peristiwa Kehidupan (Multi-Service Bundles) */}
+        <div className="border-t border-slate-200 bg-slate-100/60">
+          <LifeEventsSection />
+        </div>
+
+        {/* 5. Cara Kerja Section */}
         <section
           id="cara-kerja"
           className="py-14 sm:py-20 px-4 sm:px-6 bg-white border-y border-slate-200"
@@ -83,10 +90,10 @@ export default function HomePage() {
                 <div className="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-lg mb-4 shadow-xs">
                   1
                 </div>
-                <h4 className="text-lg font-bold text-slate-900 mb-2">Pilih Layanan</h4>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Pilih Layanan / Peristiwa</h4>
                 <p className="text-sm text-slate-600 leading-relaxed flex-1">
                   Temukan jenis layanan yang ingin Anda urus (seperti KTP, Kartu Keluarga, Pindah
-                  Domisili, Akta, atau Surat Keterangan).
+                  Domisili, Akta, atau Surat Keterangan Kelurahan).
                 </p>
               </div>
 
@@ -97,8 +104,8 @@ export default function HomePage() {
                 </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Jawab Pertanyaan Kondisi</h4>
                 <p className="text-sm text-slate-600 leading-relaxed flex-1">
-                  Jawab 2&ndash;3 pertanyaan singkat. Sistem akan menyesuaikan persyaratan dokumen
-                  secara spesifik sesuai situasi Anda.
+                  Jawab 2&ndash;3 pertanyaan singkat. Mesin aturan akan menyaring persyaratan dokumen
+                  dan menghitung kebutuhan materai sesuai situasi Anda.
                 </p>
               </div>
 
@@ -107,17 +114,43 @@ export default function HomePage() {
                 <div className="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-lg mb-4 shadow-xs">
                   3
                 </div>
-                <h4 className="text-lg font-bold text-slate-900 mb-2">Checklist & Berangkat</h4>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">
+                  Checklist, Buat Surat &amp; Berangkat
+                </h4>
                 <p className="text-sm text-slate-600 leading-relaxed flex-1">
-                  Dapatkan daftar dokumen terstruktur. Centang dokumen yang sudah Anda siapkan di
-                  rumah, cetak checklist, dan datang dengan percaya diri.
+                  Centang dokumen yang sudah siap, cetak template surat pernyataan mandiri (SPTJM/SKTM)
+                  bila diperlukan, dan datang ke loket sekali jalan.
                 </p>
               </div>
+            </div>
+
+            {/* Template Generator Callout Banner */}
+            <div className="mt-10 rounded-2xl border border-blue-200 bg-blue-50/60 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0">
+                  <FileTextIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-bold text-slate-900">
+                    Butuh Template Surat Pernyataan Mandiri (SPTJM F-2.03 / F-2.04 / SKTM / SKU)?
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                    Isi formulir secara aman di browser Anda dan langsung cetak surat pernyataan resmi ukuran A4 siap tanda tangan di atas materai.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/template"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shrink-0 transition-colors shadow-2xs"
+              >
+                <span>Buka Generator Surat</span>
+                <ArrowRightIcon className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* 5. Transparansi & Nilai Keterbukaan */}
+        {/* 6. Transparansi & Nilai Keterbukaan */}
         <section id="transparansi" className="py-14 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-6 flex flex-col gap-4">
@@ -125,7 +158,7 @@ export default function HomePage() {
                 Keterbukaan Publik
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-tight">
-                Hak Warga: Bebas Biaya & Bebas Calo
+                Hak Warga: Bebas Biaya &amp; Bebas Calo
               </h2>
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 Berdasarkan <strong>Undang-Undang No. 24 Tahun 2013</strong> Pasal 79A, pengurusan
@@ -156,7 +189,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 text-lg">Prinsip Privasi Data</h3>
-                    <p className="text-xs text-emerald-800 font-medium">Aman & Mandiri</p>
+                    <p className="text-xs text-emerald-800 font-medium">Aman &amp; Mandiri</p>
                   </div>
                 </div>
 
@@ -188,7 +221,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 6. Official Disclaimer Box */}
+        {/* 7. Official Disclaimer Box */}
         <section className="px-4 sm:px-6 pb-16 max-w-6xl mx-auto">
           <div className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 flex items-start gap-3.5 shadow-2xs">
             <InfoIcon className="w-5 h-5 text-slate-500 shrink-0 mt-0.5" />
@@ -202,7 +235,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* 7. Footer */}
+      {/* 8. Footer */}
       <Footer />
     </div>
   );

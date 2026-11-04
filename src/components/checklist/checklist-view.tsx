@@ -27,7 +27,9 @@ export interface ChecklistViewProps {
   service: Service;
   mandatoryRequirements: Requirement[];
   conditionalRequirements: Requirement[];
+  reasonsByRequirementId?: Record<string, string[]>;
   conditions?: { questionTitle: string; answerLabel: string }[];
+  shareableUrl?: string;
 }
 
 type FilterType = 'all' | 'pending' | 'completed';
@@ -36,7 +38,9 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
   service,
   mandatoryRequirements,
   conditionalRequirements,
+  reasonsByRequirementId = {},
   conditions = [],
+  shareableUrl,
 }) => {
   const allRequirements = useMemo(
     () => [...mandatoryRequirements, ...conditionalRequirements],
@@ -107,6 +111,11 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
     setStoredChecked(nextChecked);
   };
 
+  const handleCheckAllOfficial = () => {
+    const allIds = allRequirements.map((r) => r.id);
+    setStoredChecked(allIds);
+  };
+
   const handleReset = () => {
     if (window.confirm('Apakah Anda yakin ingin mereset seluruh centang checklist ini?')) {
       setStoredChecked([]);
@@ -121,7 +130,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
   // Handlers for Custom Items
   const handleAddCustomItem = (text: string) => {
     const newItem: CustomItem = {
-      id: `custom-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+      id: `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       text,
       isChecked: false,
     };
@@ -159,6 +168,8 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
 
   // Formatted share text for WhatsApp and Clipboard
   const shareText = useMemo(() => {
+    const effectiveUrl =
+      shareableUrl || (typeof window !== 'undefined' ? window.location.href : undefined);
     return formatChecklistShareText({
       service,
       mandatoryRequirements,
@@ -166,9 +177,17 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
       checkedIds,
       customItems,
       conditions,
-      appUrl: typeof window !== 'undefined' ? window.location.href : undefined,
+      appUrl: effectiveUrl,
     });
-  }, [service, mandatoryRequirements, conditionalRequirements, checkedIds, customItems, conditions]);
+  }, [
+    service,
+    mandatoryRequirements,
+    conditionalRequirements,
+    checkedIds,
+    customItems,
+    conditions,
+    shareableUrl,
+  ]);
 
   const whatsappUrl = useMemo(() => {
     return generateWhatsAppShareUrl(shareText);
@@ -213,6 +232,20 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
               Cetak / PDF
             </Button>
 
+            {/* Check All Action */}
+            {!isAllOfficialChecked && totalReqCount > 0 && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleCheckAllOfficial}
+                leftIcon={<CheckIcon className="w-4 h-4" />}
+                className="text-blue-600 hover:text-blue-700"
+              >
+                Tandai Semua Siap
+              </Button>
+            )}
+
             {/* Reset Action */}
             {totalCombinedChecked > 0 && (
               <Button
@@ -252,7 +285,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
         <button
           type="button"
           onClick={() => setFilter('all')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             filter === 'all'
               ? 'bg-white text-slate-900 shadow-xs'
               : 'text-slate-600 hover:text-slate-900'
@@ -263,7 +296,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
         <button
           type="button"
           onClick={() => setFilter('pending')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             filter === 'pending'
               ? 'bg-white text-blue-600 shadow-xs'
               : 'text-slate-600 hover:text-slate-900'
@@ -274,7 +307,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
         <button
           type="button"
           onClick={() => setFilter('completed')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             filter === 'completed'
               ? 'bg-white text-emerald-600 shadow-xs'
               : 'text-slate-600 hover:text-slate-900'
@@ -290,10 +323,10 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
           <div className="flex items-center justify-between mb-3.5">
             <div>
               <h3 className="text-base sm:text-lg font-bold text-slate-900">
-                Dokumen Wajib
+                Dokumen Wajib Utama
               </h3>
               <p className="text-xs sm:text-sm text-slate-500">
-                Persyaratan mutlak yang harus dibawa oleh seluruh pemohon.
+                Persyaratan pokok yang wajib dibawa oleh pemohon pada pengajuan ini.
               </p>
             </div>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700">
@@ -308,6 +341,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
                 requirement={req}
                 isChecked={checkedIds.includes(req.id)}
                 onToggle={handleToggle}
+                reasons={reasonsByRequirementId[req.id]}
               />
             ))}
           </div>
@@ -323,10 +357,10 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
                 Dokumen Tambahan Sesuai Kondisi Anda
               </h3>
               <p className="text-xs sm:text-sm text-slate-500">
-                Disesuaikan berdasarkan jawaban situasi yang Anda pilih sebelumnya.
+                Disaring secara spesifik oleh Rule Engine berdasarkan jawaban kondisi Anda.
               </p>
             </div>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 text-slate-700">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700">
               {filteredConditional.length} Berkas
             </span>
           </div>
@@ -338,6 +372,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
                 requirement={req}
                 isChecked={checkedIds.includes(req.id)}
                 onToggle={handleToggle}
+                reasons={reasonsByRequirementId[req.id]}
               />
             ))}
           </div>
@@ -349,7 +384,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
         <div className="py-8 text-center rounded-2xl border border-dashed border-slate-200 bg-white p-6 no-print">
           <p className="text-sm text-slate-600 font-medium">
             {filter === 'pending'
-              ? '🎉 Selamat! Tidak ada dokumen resmi yang belum siap.'
+              ? 'Selamat! Tidak ada dokumen resmi yang belum siap.'
               : 'Belum ada dokumen yang dicentang siap.'}
           </p>
           <button
@@ -380,7 +415,7 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
           className="text-sm font-semibold text-slate-600 hover:text-blue-600 flex items-center gap-1.5"
         >
           <ChevronLeftIcon className="w-4 h-4" />
-          <span>Ubah Jawaban Kondisi Sebelumnya</span>
+          <span>Ubah Jawaban melalui Wizard Langkah-demi-Langkah</span>
         </Link>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">

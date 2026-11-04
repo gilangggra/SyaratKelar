@@ -10,6 +10,10 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
       'Surat Pernyataan Tanggung Jawab Mutlak sebagai pengganti surat keterangan kelahiran dari dokter/bidan bagi pengurusan Akta Kelahiran.',
     legalBasis: 'Permendagri No. 108 Tahun 2019 & Perpres No. 96 Tahun 2018',
     destinationAgency: 'Dinas Kependudukan dan Pencatatan Sipil',
+    requiresMaterai: true,
+    relatedServiceSlug: 'akta-kelahiran',
+    statementIntro:
+      'Menyatakan dengan sesungguhnya dan penuh tanggung jawab mutlak bahwa telah lahir seorang anak dengan data kelahiran sebagai berikut:',
     fields: [
       {
         id: 'nama_pemohon',
@@ -17,6 +21,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Ahmad Hidayat',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nik_pemohon',
@@ -24,6 +29,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: '16 digit NIK sesuai KTP',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'pekerjaan_pemohon',
@@ -31,6 +37,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Karyawan Swasta / Wiraswasta',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'alamat_pemohon',
@@ -38,6 +45,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'textarea',
         placeholder: 'Jalan, RT/RW, Kelurahan, Kecamatan, Kota/Kabupaten',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nama_anak',
@@ -45,6 +53,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Nama anak yang dimohonkan akta lahir',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'tempat_lahir_anak',
@@ -52,24 +61,28 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Kota / Kabupaten tempat lahir',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'tanggal_lahir_anak',
         label: 'Tanggal Lahir Anak',
         type: 'date',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nama_ibu_kandung',
         label: 'Nama Lengkap Ibu Kandung',
         type: 'text',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nama_ayah_kandung',
         label: 'Nama Lengkap Ayah Kandung',
         type: 'text',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nama_saksi_1',
@@ -77,6 +90,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Nama saksi yang mengetahui kelahiran',
         required: true,
+        section: 'saksi',
       },
       {
         id: 'nama_saksi_2',
@@ -84,6 +98,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Nama saksi yang mengetahui kelahiran',
         required: true,
+        section: 'saksi',
       },
     ],
   },
@@ -96,12 +111,17 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
       'Surat pernyataan kebenaran ikatan perkawinan bagi pasangan yang belum memiliki Buku Nikah / Akta Perkawinan resmi saat mencatatkan akta anak.',
     legalBasis: 'Permendagri No. 108 Tahun 2019',
     destinationAgency: 'Dinas Kependudukan dan Pencatatan Sipil',
+    requiresMaterai: true,
+    relatedServiceSlug: 'akta-kelahiran',
+    statementIntro:
+      'Menyatakan dengan sesungguhnya bahwa kami telah melangsungkan perkawinan dan hidup bersama sebagai pasangan suami istri yang sah dengan rincian:',
     fields: [
       {
         id: 'nama_suami',
-        label: 'Nama Lengkap Suami',
+        label: 'Nama Lengkap Suami (Pihak Pertama)',
         type: 'text',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nik_suami',
@@ -109,12 +129,14 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: '16 digit NIK',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nama_istri',
-        label: 'Nama Lengkap Istri',
+        label: 'Nama Lengkap Istri (Pihak Kedua)',
         type: 'text',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nik_istri',
@@ -122,30 +144,35 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: '16 digit NIK',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'alamat_pasangan',
         label: 'Alamat Tempat Tinggal Bersama',
         type: 'textarea',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'tanggal_pernikahan',
         label: 'Tanggal Dilangsungkannya Pernikahan',
         type: 'date',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nama_saksi_1',
         label: 'Nama Saksi Pernikahan I',
         type: 'text',
         required: true,
+        section: 'saksi',
       },
       {
         id: 'nama_saksi_2',
         label: 'Nama Saksi Pernikahan II',
         type: 'text',
         required: true,
+        section: 'saksi',
       },
     ],
   },
@@ -158,31 +185,39 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
       'Surat pernyataan mandiri bermaterai mengenai kondisi sosial ekonomi keluarga yang diajukan ke Kelurahan/Desa untuk penerbitan SKTM.',
     legalBasis: 'Standar Pelayanan Publik Administrasi Kelurahan / Desa',
     destinationAgency: 'Kantor Kelurahan / Kantor Desa Setempat',
+    requiresMaterai: true,
+    relatedServiceSlug: 'sktm',
+    statementIntro:
+      'Menyatakan dengan sebenarnya bahwa keluarga kami saat ini tergolong keluarga berpenghasilan rendah / kurang mampu secara ekonomi dengan keterangan:',
     fields: [
       {
         id: 'nama_pemohon',
         label: 'Nama Lengkap Kepala Keluarga / Pemohon',
         type: 'text',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nik_pemohon',
         label: 'NIK Pemohon',
         type: 'text',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'pekerjaan',
         label: 'Pekerjaan / Sumber Penghasilan',
         type: 'text',
-        placeholder: 'Contoh: Buruh Harian Lepas / Pedagang Asongan',
+        placeholder: 'Contoh: Buruh Harian Lepas / Pedagang Kecil',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'alamat',
         label: 'Alamat Domisili Lengkap',
         type: 'textarea',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'jumlah_tanggungan',
@@ -190,13 +225,15 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: 4 orang (Istri dan 3 orang anak)',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'keperluan_sktm',
         label: 'Keperluan Pembuatan SKTM',
         type: 'text',
-        placeholder: 'Contoh: Persyaratan KIP Kuliah / Keringanan Biaya Pendidikan',
+        placeholder: 'Contoh: Persyaratan KIP Kuliah / Keringanan Biaya Rumah Sakit',
         required: true,
+        section: 'pernyataan',
       },
     ],
   },
@@ -209,18 +246,24 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
       'Surat pernyataan ahli waris bermaterai mengenai fisik KTP almarhum/almarhumah yang hilang atau tidak ditemukan saat pelaporan kematian.',
     legalBasis: 'Permendagri No. 108 Tahun 2019 Pasal 44',
     destinationAgency: 'Dinas Kependudukan dan Pencatatan Sipil',
+    requiresMaterai: true,
+    relatedServiceSlug: 'akta-kematian',
+    statementIntro:
+      'Menyatakan dengan sesungguhnya bahwa dokumen fisik KTP-el asli atas nama anggota keluarga kami yang telah meninggal dunia benar-benar hilang / tercecer dan tidak dapat ditemukan:',
     fields: [
       {
         id: 'nama_pelapor',
         label: 'Nama Lengkap Ahli Waris / Pelapor',
         type: 'text',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nik_pelapor',
         label: 'NIK Pelapor',
         type: 'text',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'hubungan_keluarga',
@@ -228,24 +271,28 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Anak Kandung / Istri / Suami',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nama_almarhum',
         label: 'Nama Lengkap Almarhum/Almarhumah',
         type: 'text',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nik_almarhum',
         label: 'NIK Almarhum (Sesuai Kartu Keluarga)',
         type: 'text',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'tanggal_kematian',
         label: 'Tanggal Meninggal Dunia',
         type: 'date',
         required: true,
+        section: 'pernyataan',
       },
     ],
   },
@@ -258,6 +305,10 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
       'Surat pernyataan mandiri bermaterai dari pemilik usaha mengenai kebenaran keberadaan fisik dan operasional usaha untuk penerbitan SKU oleh Kelurahan/Desa.',
     legalBasis: 'UU No. 6 Tahun 2014 & Standar Pelayanan Administrasi Kelurahan',
     destinationAgency: 'Kantor Kelurahan / Desa Setempat',
+    requiresMaterai: true,
+    relatedServiceSlug: 'sku',
+    statementIntro:
+      'Menyatakan dengan sesungguhnya bahwa saya benar-benar memiliki dan menjalankan kegiatan usaha mandiri yang masih beroperasi aktif sebagai berikut:',
     fields: [
       {
         id: 'nama_pemohon',
@@ -265,6 +316,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Nama pemilik sesuai KTP',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nik_pemohon',
@@ -272,6 +324,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: '16 digit NIK',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'alamat_pemohon',
@@ -279,6 +332,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'textarea',
         placeholder: 'Alamat domisili sesuai KTP',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nama_usaha',
@@ -286,6 +340,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Toko Berkah Jaya / Warung Makan Bu Siti',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'bidang_usaha',
@@ -293,6 +348,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Perdagangan Sembako / Kuliner / Jasa Servis Elektronik',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'alamat_usaha',
@@ -300,6 +356,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'textarea',
         placeholder: 'Jalan, RT/RW, Kelurahan, Kecamatan tempat berniaga',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'tahun_mulai_usaha',
@@ -307,6 +364,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Sejak Tahun 2021',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'keperluan_sku',
@@ -314,6 +372,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Contoh: Pengajuan KUR Mikro Bank / Pendaftaran Bantuan UMKM',
         required: true,
+        section: 'pernyataan',
       },
     ],
   },
@@ -326,6 +385,10 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
       'Surat pernyataan bersama seluruh ahli waris sah mengenai susunan keturunan almarhum/almarhumah bermaterai Rp10.000 dengan kesaksian pengurus lingkungan.',
     legalBasis: 'Pedoman Pelayanan Administrasi Wilayah & SEMA Hak Waris',
     destinationAgency: 'Kantor Kelurahan & Kantor Kecamatan',
+    requiresMaterai: true,
+    relatedServiceSlug: 'surat-ahli-waris',
+    statementIntro:
+      'Menyatakan dengan sesungguhnya dan di bawah sumpah bahwa almarhum/almarhumah pewaris telah meninggal dunia dan meninggalkan ahli waris yang sah menurut hukum tanpa ada pihak lain yang disembunyikan, dengan rincian:',
     fields: [
       {
         id: 'nama_pemohon',
@@ -333,6 +396,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: 'Nama salah satu ahli waris yang mengurus',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nik_pemohon',
@@ -340,6 +404,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'text',
         placeholder: '16 digit NIK',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'alamat_pemohon',
@@ -347,40 +412,48 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         type: 'textarea',
         placeholder: 'Alamat lengkap sesuai KTP',
         required: true,
+        section: 'identitas',
       },
       {
         id: 'nama_pewaris',
-        label: 'Nama Lengkap Almarhum (Pewaris)',
+        label: 'Nama Lengkap Almarhum/Almarhumah (Pewaris)',
         type: 'text',
         placeholder: 'Nama almarhum/almarhumah ayah/ibu',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'tanggal_kematian_pewaris',
         label: 'Tanggal Wafat Almarhum',
         type: 'date',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'daftar_ahli_waris',
-        label: 'Daftar Seluruh Nama Ahli Waris & Hubungan',
+        label: 'Daftar Seluruh Nama Ahli Waris & Hubungan Keluarga',
         type: 'textarea',
-        placeholder: '1. Nama Istri (Istri/Janda)\n2. Nama Anak ke-1 (Anak Kandung)\n3. Nama Anak ke-2 (Anak Kandung)',
+        placeholder:
+          '1. Siti Aminah (Istri / Janda, 58 thn)\n2. Budi Santoso (Anak Kandung Pertama, 32 thn)\n3. Rina Kartika (Anak Kandung Kedua, 27 thn)',
+        helperText: 'Tuliskan satu nama per baris beserta hubungan keluarga dengan pewaris.',
         required: true,
+        section: 'pernyataan',
       },
       {
         id: 'nama_saksi_1',
-        label: 'Nama Saksi I (Ketua RT Setempat)',
+        label: 'Nama Saksi I (Ketua RT / Saksi Lingkungan)',
         type: 'text',
-        placeholder: 'Nama lengkap Ketua RT',
+        placeholder: 'Nama lengkap Saksi I',
         required: true,
+        section: 'saksi',
       },
       {
         id: 'nama_saksi_2',
         label: 'Nama Saksi II (Ketua RW / Tokoh Masyarakat)',
         type: 'text',
-        placeholder: 'Nama lengkap Ketua RW',
+        placeholder: 'Nama lengkap Saksi II',
         required: true,
+        section: 'saksi',
       },
     ],
   },

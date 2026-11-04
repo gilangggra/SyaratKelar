@@ -13,30 +13,31 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Print styling support for printable checklist */
+/* Print styling support for printable checklist & official A4 letter templates */
 @media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
   body {
     background-color: #ffffff !important;
     color: #000000 !important;
-    font-size: 12pt;
+    font-size: 11pt;
   }
 
+  header,
+  footer,
   .no-print {
     display: none !important;
   }
 
   .print-only {
     display: block !important;
-  }
-
-  a[href]:after {
-    content: " (" attr(href) ")";
-    font-size: 90%;
-    color: #555;
   }
 }

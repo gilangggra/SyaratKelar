@@ -12,6 +12,16 @@ export const sktmService: Service = {
   categoryLabel: 'Pelayanan Kelurahan',
   destinationAgency: 'Kantor Kelurahan / Desa & Dinas Sosial Setempat',
   estimatedTime: '1 - 2 hari kerja (tergantung verifikasi lapangan jika diperlukan)',
+  keywords: [
+    'kip kuliah',
+    'beasiswa',
+    'keringanan ukt spp',
+    'bpjs pbi gratis',
+    'keringanan biaya rumah sakit',
+    'surat miskin',
+    'dtks',
+    'bantuan sosial',
+  ],
   fees: {
     isFree: true,
     officialAmount: 0,
@@ -54,11 +64,29 @@ export const sktmService: Service = {
         },
         {
           id: 'umum',
-          label: 'Bantuan Sosial / Keperluan Administrasi Umum Lainnya',
+          label: 'Bantuan Hukum / Keperluan Sosial Administrasi Lainnya',
           value: 'umum',
         },
       ],
       defaultValue: 'pendidikan',
+    },
+    {
+      id: 'status_dtks',
+      title: 'Apakah keluarga Anda sudah memiliki kartu bantuan (KIP / PKH / KKS) atau terdaftar di DTKS?',
+      description: 'Memudahkan verifikasi status kesejahteraan sosial di Kelurahan dan Dinas Sosial.',
+      options: [
+        {
+          id: 'belum_terdaftar',
+          label: 'Belum Terdaftar / Tidak Punya Kartu Bantuan Sosial',
+          value: 'belum_terdaftar',
+        },
+        {
+          id: 'sudah_terdaftar',
+          label: 'Sudah Terdaftar DTKS / Memiliki Kartu KIP, PKH, atau KKS',
+          value: 'sudah_terdaftar',
+        },
+      ],
+      defaultValue: 'belum_terdaftar',
     },
   ],
   baseRequirementIds: [
@@ -70,7 +98,7 @@ export const sktmService: Service = {
   allRequirements: [
     {
       id: 'ktp_pemohon_sktm',
-      title: 'Fotokopi KTP-el Pemohon / Kepala Keluarga',
+      title: 'Fotokopi & Asli KTP-el Pemohon / Kepala Keluarga',
       description: 'Salinan KTP yang masih berlaku untuk verifikasi identitas kependudukan.',
       isMandatory: true,
     },
@@ -82,7 +110,7 @@ export const sktmService: Service = {
     },
     {
       id: 'pengantar_rt_rw_sktm',
-      title: 'Surat Pengantar RT/RW yang Menyatakan Tidak Mampu',
+      title: 'Surat Pengantar RT/RW yang Menyatakan Kondisi Ekonomi Tidak Mampu',
       description: 'Surat keterangan dari pengurus RT dan RW lingkungan tempat tinggal pemohon.',
       isMandatory: true,
       notes: 'Pengurus RT/RW mengetahui kondisi ekonomi warganya secara langsung di lapangan.',
@@ -92,23 +120,37 @@ export const sktmService: Service = {
       title: 'Surat Pernyataan Tidak Mampu Bermaterai Rp10.000',
       description: 'Surat pernyataan yang ditandatangani kepala keluarga menyatakan kebenaran kondisi ekonomi.',
       isMandatory: true,
-      notes: 'Format pernyataan biasanya tersedia di kelurahan atau dibuat mandiri.',
+      requiresMaterai: true,
+      notes: 'Tanda tangan harus mengenai sebagian permukaan materai Rp10.000.',
       templateAvailable: true,
       templateId: 'pernyataan-tidak-mampu',
     },
     {
       id: 'rekomendasi_sekolah_kampus',
-      title: 'Surat Keterangan / Kartu Pelajar / Mahasiswa',
-      description: 'Bukti siswa/mahasiswa aktif dari sekolah atau kampus tujuan beasiswa.',
+      title: 'Surat Keterangan Sekolah/Kampus atau Kartu Pelajar/Mahasiswa',
+      description: 'Bukti siswa/mahasiswa aktif atau formulir pengajuan beasiswa/keringanan UKT dari institusi pendidikan.',
       isMandatory: false,
-      notes: 'Wajib untuk keperluan KIP Kuliah atau keringanan biaya SPP/UKT.',
+      notes: 'Wajib untuk keperluan KIP Kuliah, beasiswa, atau keringanan biaya SPP/UKT.',
     },
     {
       id: 'surat_keterangan_rawat_rs',
-      title: 'Surat Rujukan Puskesmas / Tagihan Biaya Rumah Sakit',
-      description: 'Kuitansi rincian biaya atau surat keterangan rawat inap dari fasilitas kesehatan.',
+      title: 'Surat Rujukan Puskesmas / Surat Keterangan Rawat Inap Rumah Sakit',
+      description: 'Surat keterangan medis atau rincian tagihan biaya perawatan dari fasilitas kesehatan.',
       isMandatory: false,
-      notes: 'Dibutuhkan oleh kelurahan dan Dinas Sosial untuk verifikasi jaminan kesehatan daerah.',
+      notes: 'Dibutuhkan oleh Kelurahan dan Dinas Sosial untuk rekomendasi jaminan kesehatan daerah.',
+    },
+    {
+      id: 'foto_kondisi_rumah',
+      title: 'Foto Kondisi Fisik Rumah Tempat Tinggal (Tampak Depan & Ruang Dalam)',
+      description: 'Cetakan foto rumah tempat tinggal pemohon sebagai bahan verifikasi kelayakan bagi warga yang belum masuk DTKS.',
+      isMandatory: false,
+      notes: 'Disarankan dibawa untuk mempercepat verifikasi petugas Kasi Kesejahteraan Rakyat di Kelurahan.',
+    },
+    {
+      id: 'bukti_kartu_bansos_dtks',
+      title: 'Fotokopi Kartu KIP / PKH / KKS atau Bukti Terdaftar Cek Bansos DTKS',
+      description: 'Salinan kartu program bantuan pemerintah atau tangkapan layar terdaftar di DTKS Kemensos.',
+      isMandatory: false,
     },
   ],
   rules: [
@@ -117,6 +159,7 @@ export const sktmService: Service = {
       questionId: 'keperluan_sktm',
       operator: 'equals',
       value: 'pendidikan',
+      reasonLabel: 'Keperluan: Pendidikan / Beasiswa / KIP Kuliah',
       requirementIds: ['rekomendasi_sekolah_kampus'],
     },
     {
@@ -124,7 +167,24 @@ export const sktmService: Service = {
       questionId: 'keperluan_sktm',
       operator: 'equals',
       value: 'kesehatan',
+      reasonLabel: 'Keperluan: Jaminan Kesehatan / Rumah Sakit',
       requirementIds: ['surat_keterangan_rawat_rs'],
+    },
+    {
+      id: 'rule_sktm_belum_dtks',
+      questionId: 'status_dtks',
+      operator: 'equals',
+      value: 'belum_terdaftar',
+      reasonLabel: 'Status DTKS: Belum Terdaftar (Verifikasi Kondisi Rumah)',
+      requirementIds: ['foto_kondisi_rumah'],
+    },
+    {
+      id: 'rule_sktm_sudah_dtks',
+      questionId: 'status_dtks',
+      operator: 'equals',
+      value: 'sudah_terdaftar',
+      reasonLabel: 'Status DTKS: Sudah Memiliki Kartu Bansos / Terdaftar DTKS',
+      requirementIds: ['bukti_kartu_bansos_dtks'],
     },
   ],
   pitfalls: [
@@ -137,7 +197,7 @@ export const sktmService: Service = {
     {
       id: 'sktm-tujuan-spesifik',
       title: 'Tujuan Pengajuan Harus Spesifik',
-      description: 'Format SKTM diterbitkan sesuai tujuan spesifik (misal: "Untuk Persyaratan KIP Kuliah" atau "Untuk Keringanan Biaya Rumah Sakit"). SKTM tidak dapat dibuat berlaku umum tanpa tujuan jelas.',
+      description: 'Format SKTM diterbitkan sesuai tujuan spesifik (misal: "Untuk Persyaratan KIP Kuliah Universitas X" atau "Untuk Keringanan Biaya RSUD Y"). SKTM tidak dapat dibuat berlaku umum tanpa tujuan jelas.',
       type: 'caution',
     },
     {
@@ -151,12 +211,12 @@ export const sktmService: Service = {
     {
       id: 'faq-sktm-1',
       question: 'Berapa lama masa berlaku selembar SKTM?',
-      answer: 'SKTM umumnya hanya berlaku untuk satu kali keperluan pengajuan yang diajukan, atau berumur maksimal 3 sampai 6 bulan sejak tanggal diterbitkan oleh kelurahan.',
+      answer: 'SKTM umumnya hanya berlaku untuk satu kali keperluan pengajuan yang tertera pada surat, atau berumur maksimal 3 sampai 6 bulan sejak tanggal diterbitkan oleh kelurahan.',
     },
     {
       id: 'faq-sktm-2',
       question: 'Apakah harus terdaftar di DTKS (Data Terpadu Kesejahteraan Sosial) Kemensos?',
-      answer: 'Untuk pengajuan beasiswa KIP Kuliah atau BPJS PBI, prioritas utama diberikan kepada keluarga yang sudah masuk dalam DTKS. Namun bagi yang belum masuk DTKS, kelurahan tetap dapat menerbitkan SKTM berdasarkan verifikasi riil kondisi ekonomi warga saat ini.',
+      answer: 'Untuk pengajuan beasiswa KIP Kuliah atau BPJS PBI, prioritas utama diberikan kepada keluarga yang sudah masuk dalam DTKS. Namun bagi yang belum masuk DTKS, kelurahan tetap dapat menerbitkan SKTM/Surat Keterangan Ekonomi Lemah berdasarkan verifikasi riil kondisi warga saat ini.',
     },
     {
       id: 'faq-sktm-3',

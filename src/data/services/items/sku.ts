@@ -12,6 +12,15 @@ export const skuService: Service = {
   categoryLabel: 'Pelayanan Kelurahan',
   destinationAgency: 'Kantor Kelurahan / Kantor Desa Setempat',
   estimatedTime: '1 hari kerja (umumnya langsung selesai di hari yang sama selama Lurah/Sekkel berada di tempat)',
+  keywords: [
+    'kur bank',
+    'pinjaman modal usaha',
+    'umkm',
+    'surat keterangan usaha',
+    'nib',
+    'usaha warung',
+    'kredit bri mandiri bni',
+  ],
   fees: {
     isFree: true,
     officialAmount: 0,
@@ -40,7 +49,7 @@ export const skuService: Service = {
     {
       id: 'lokasi_tempat_usaha',
       title: 'Di mana lokasi tempat usaha Anda dijalankan?',
-      description: 'Menentukan apakah diperlukan surat keterangan sewa atau domisili usaha tambahan.',
+      description: 'Menentukan apakah diperlukan surat keterangan sewa atau bukti izin lokasi usaha tambahan.',
       options: [
         {
           id: 'di_rumah_pribadi',
@@ -49,11 +58,29 @@ export const skuService: Service = {
         },
         {
           id: 'sewa_kontrak',
-          label: 'Menyewa Tempat / Lokasi di Luar Rumah Sendiri',
+          label: 'Menyewa Tempat / Ruko / Lapak di Luar Rumah Sendiri',
           value: 'sewa_kontrak',
         },
       ],
       defaultValue: 'di_rumah_pribadi',
+    },
+    {
+      id: 'status_ktp_pemohon',
+      title: 'Apakah alamat KTP-el Anda sesuai dengan Kelurahan lokasi usaha?',
+      description: 'Menentukan apakah diperlukan keterangan domisili usaha bagi warga luar kelurahan.',
+      options: [
+        {
+          id: 'ktp_setempat',
+          label: 'Ya, KTP Sesuai dengan Kelurahan Tempat Usaha',
+          value: 'ktp_setempat',
+        },
+        {
+          id: 'ktp_luar',
+          label: 'Tidak, KTP Berasal dari Kelurahan / Kota Lain',
+          value: 'ktp_luar',
+        },
+      ],
+      defaultValue: 'ktp_setempat',
     },
   ],
   baseRequirementIds: [
@@ -66,8 +93,8 @@ export const skuService: Service = {
   allRequirements: [
     {
       id: 'ktp_pemohon_sku',
-      title: 'Fotokopi KTP-el Pemilik Usaha',
-      description: 'Menunjukkan KTP asli dan menyerahkan 1 lembar salinan fotokopi.',
+      title: 'Fotokopi & Asli KTP-el Pemilik Usaha',
+      description: 'Menunjukkan KTP asli dan menyerahkan salinan fotokopi.',
       isMandatory: true,
     },
     {
@@ -78,16 +105,17 @@ export const skuService: Service = {
     },
     {
       id: 'pengantar_rt_rw_sku',
-      title: 'Surat Pengantar dari RT dan RW Setempat',
-      description: 'Surat pengantar bertandatangan dan cap basah Ketua RT serta Ketua RW lokasi usaha.',
+      title: 'Surat Pengantar dari RT dan RW Lokasi Usaha',
+      description: 'Surat pengantar bertandatangan dan cap basah Ketua RT serta Ketua RW lokasi tempat usaha.',
       isMandatory: true,
-      notes: 'Surat keterangan kelurahan non-adminduk pusat tetap membutuhkan pengantar RT/RW sebagai verifikasi lingkungan.',
+      notes: 'Surat keterangan kelurahan non-adminduk tetap membutuhkan pengantar RT/RW sebagai verifikasi lingkungan.',
     },
     {
       id: 'pernyataan_usaha_sku',
       title: 'Surat Pernyataan Tempat dan Kegiatan Usaha Bermaterai Rp10.000',
       description: 'Surat pernyataan mandiri mengenai kebenaran kepemilikan dan lokasi usaha aktif yang dijalankan.',
       isMandatory: true,
+      requiresMaterai: true,
       notes: 'Dibuat mandiri dengan materai Rp10.000 sebelum meminta pengantar RT/RW atau diajukan ke kelurahan.',
       templateAvailable: true,
       templateId: 'surat-pernyataan-usaha',
@@ -95,16 +123,23 @@ export const skuService: Service = {
     {
       id: 'foto_usaha',
       title: 'Foto Fisik Kegiatan Usaha / Tempat Usaha',
-      description: 'Cetak foto berwarna yang memperlihatkan plang usaha, etalase barang, atau tempat berniaga pemohon.',
+      description: 'Cetak foto berwarna yang memperlihatkan pemilik usaha di depan plang usaha, etalase barang, atau tempat berniaga.',
       isMandatory: true,
-      notes: 'Umumnya diminta 1 lembar foto ukuran 3R/4R atau diprint di kertas HVS.',
+      notes: 'Umumnya diminta 1-2 lembar foto ukuran 3R/4R atau dicetak di kertas HVS.',
     },
     {
       id: 'perjanjian_sewa_lokasi',
-      title: 'Surat Perjanjian Sewa / Izin Tempat Usaha',
-      description: 'Fotokopi surat sewa tempat atau surat tidak keberatan dari pemilik bangunan.',
+      title: 'Bukti Sewa Tempat / Kwitansi Kontrak / Surat Izin Pemilik Lahan',
+      description: 'Fotokopi surat perjanjian sewa tempat, kuitansi sewa, atau surat tidak keberatan dari pemilik bangunan.',
       isMandatory: false,
-      notes: 'Hanya jika lokasi usaha mengontrak/menyewa dari pihak lain.',
+      notes: 'Wajib dilampirkan karena lokasi usaha berada di bangunan/lahan sewa.',
+    },
+    {
+      id: 'keterangan_domisili_rt_rw_usaha',
+      title: 'Keterangan Domisili Tempat Usaha dari RT/RW Setempat',
+      description: 'Penegasan pada surat pengantar RT/RW bahwa pemohon ber-KTP luar daerah benar membuka usaha aktif di wilayah RT/RW tersebut.',
+      isMandatory: false,
+      notes: 'Diperlukan karena alamat KTP pemohon berbeda dengan kelurahan lokasi usaha.',
     },
   ],
   rules: [
@@ -113,7 +148,16 @@ export const skuService: Service = {
       questionId: 'lokasi_tempat_usaha',
       operator: 'equals',
       value: 'sewa_kontrak',
+      reasonLabel: 'Lokasi Usaha: Menyewa Tempat / Di Luar Rumah Pribadi',
       requirementIds: ['perjanjian_sewa_lokasi'],
+    },
+    {
+      id: 'rule_sku_ktp_luar',
+      questionId: 'status_ktp_pemohon',
+      operator: 'equals',
+      value: 'ktp_luar',
+      reasonLabel: 'Domisili KTP: Berbeda dengan Kelurahan Lokasi Usaha',
+      requirementIds: ['keterangan_domisili_rt_rw_usaha'],
     },
   ],
   pitfalls: [
@@ -126,7 +170,7 @@ export const skuService: Service = {
     {
       id: 'sku-foto-kegiatan-jelas',
       title: 'Foto Usaha Harus Memperlihatkan Aktivitas Riil',
-      description: 'Pastikan foto fisik yang dicetak memperlihatkan plang nama usaha, produk jualan, atau diri Anda saat berada di lokasi usaha. Petugas kelurahan menolak foto yang hanya diambil dari internet.',
+      description: 'Pastikan foto fisik yang dicetak memperlihatkan plang nama usaha, produk jualan, dan diri Anda saat berada di lokasi usaha. Petugas kelurahan menolak foto yang hanya diambil dari internet.',
       type: 'caution',
     },
     {
