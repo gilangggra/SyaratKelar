@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Service, UserAnswers } from '@/types';
 import { getActiveQuestions, sanitizeAnswersForActiveQuestions } from '@/lib/rules/engine';
@@ -38,7 +39,6 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
     [answers, defaultAnswers]
   );
 
-  // Hitung daftar pertanyaan aktif secara dinamis berdasarkan dependsOn
   const activeQuestions = React.useMemo(
     () => getActiveQuestions(service, safeAnswers),
     [service, safeAnswers]
@@ -48,10 +48,8 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Pastikan currentStep selalu berada di rentang valid jika activeQuestions berubah
   const safeCurrentStep = Math.min(currentStep, Math.max(totalSteps - 1, 0));
 
-  // If service has no conditional questions, direct to hasil
   if (totalSteps === 0) {
     return (
       <div className="text-center py-12">
@@ -97,7 +95,6 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
       const finalAnswers = sanitizeAnswersForActiveQuestions(service, safeAnswers);
       saveUserAnswers(service.id, finalAnswers);
 
-      // Buat query string kondisi agar URL hasil bersifat shareable
       const params = new URLSearchParams();
       Object.entries(finalAnswers).forEach(([k, v]) => {
         if (v) params.set(k, v);
@@ -121,55 +118,31 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      {/* Header & Step Tracker */}
-      <div className="mb-6 sm:mb-8">
-        <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-500 mb-2">
-          <span>{service.name}</span>
-          <span>
-            Langkah {safeCurrentStep + 1} dari {totalSteps}
-          </span>
+      {/* Clean Header & Step Progress */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-blue-50 text-blue-700">
+              Pertanyaan {safeCurrentStep + 1} dari {totalSteps}
+            </span>
+            <span className="text-xs sm:text-sm font-medium text-slate-600 truncate">
+              {service.name}
+            </span>
+          </div>
+
+          <Link
+            href={`/layanan/${service.slug}/hasil`}
+            className="text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors shrink-0"
+          >
+            Lewati ke Checklist &rarr;
+          </Link>
         </div>
 
         <ProgressBar
           current={safeCurrentStep + 1}
           total={totalSteps}
           showCount={false}
-          className="mb-3"
         />
-
-        {/* Stepper Pills Indicator */}
-        {totalSteps > 1 && (
-          <div className="flex flex-wrap items-center gap-1.5 mt-2">
-            {activeQuestions.map((q, idx) => {
-              const isCompleted = idx < safeCurrentStep;
-              const isCurrent = idx === safeCurrentStep;
-              const ansLabel = q.options.find((o) => o.value === safeAnswers[q.id])?.label;
-
-              return (
-                <button
-                  key={q.id}
-                  type="button"
-                  onClick={() => {
-                    if (idx <= safeCurrentStep) {
-                      setCurrentStep(idx);
-                    }
-                  }}
-                  disabled={idx > safeCurrentStep}
-                  className={`text-[11px] font-medium px-2.5 py-1 rounded-md border transition-colors text-left truncate max-w-[220px] ${
-                    isCurrent
-                      ? 'bg-blue-50 border-blue-300 text-blue-700 font-semibold'
-                      : isCompleted
-                      ? 'bg-emerald-50/70 border-emerald-200 text-emerald-800 hover:bg-emerald-100 cursor-pointer'
-                      : 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed'
-                  }`}
-                  title={q.title}
-                >
-                  {idx + 1}. {isCompleted && ansLabel ? ansLabel : q.title}
-                </button>
-              );
-            })}
-          </div>
-        )}
       </div>
 
       {/* Active Question Card */}
@@ -180,7 +153,7 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
       />
 
       {/* Navigation Buttons */}
-      <div className="mt-8 flex items-center justify-between gap-4">
+      <div className="mt-6 flex items-center justify-between gap-4">
         <Button
           type="button"
           variant="outline"
@@ -188,19 +161,19 @@ export const QuestionWizard: React.FC<QuestionWizardProps> = ({ service }) => {
           onClick={handleBack}
           leftIcon={<ChevronLeftIcon className="w-5 h-5" />}
         >
-          {isFirstStep ? 'Batal' : 'Kembali'}
+          {isFirstStep ? 'Kembali' : 'Sebelumnya'}
         </Button>
 
         <Button
           type="button"
           variant="primary"
-          size="md"
+          size="lg"
           onClick={handleNext}
           disabled={!currentAnswer || isSubmitting}
           isLoading={isSubmitting}
           rightIcon={!isSubmitting && <ArrowRightIcon className="w-5 h-5" />}
         >
-          {isLastStep ? 'Lihat Persyaratan Saya' : 'Lanjut'}
+          {isLastStep ? 'Lihat Checklist Persyaratan' : 'Lanjut'}
         </Button>
       </div>
     </div>
